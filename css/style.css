@@ -1,0 +1,55 @@
+/* Resetting some default styles for body and heading elements */
+body {
+    background-color: lightgray; /* Set the background color to light gray */
+    margin: 0;
+}
+
+h1, h2, h3 {
+    font-family: sans-serif;
+    color: black;
+    text-align: center;
+    background-color: darkgray;
+    border: 3px solid black;
+    margin: 0;
+}
+
+/* Styling for the navigation bar */
+nav.navbar {
+    text-align: center;
+}
+
+/* Centered Icon Style */
+.center-icon {
+    display: block;
+    margin: 0 auto;
+    max-width: 15%; /* Adjust the size as needed */
+    padding: 5px; /* Add padding to create space around the logo */
+}
+
+/* Centered Buttons */
+.centered-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.centered-buttons button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.centered-buttons button:hover {
+    background-color: #333; /* Darken the background on hover */
+}
+
+/* Footer styles */
+footer {
+    text-align: right;
+    padding: 10px;
+}
