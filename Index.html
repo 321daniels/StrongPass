@@ -1,55 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>StrongPass</title>
-    <link rel="stylesheet" href="C:\Users\Boza\OneDrive\School\CSI 4999\css\style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href=".\css\style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<body>
-    <body style="background-color: lightgray;">
+  <body style="background-color: lightgray">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">StrongPass</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="password.html">Password</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="support.html">Support</a>
-                    </li>
-                </ul>
-            </div>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">StrongPass</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="Index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./html/view_passwords.html">Password</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="support.html">Support</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
     <h1>Welcome to StrongPass</h1>
- 
 
     <!-- Centered Icon -->
-    <img src="C:\Users\Boza\OneDrive\School\CSI 4999\Images\logo small.png" alt="StrongPass Logo" class="center-icon">
-    
+    <img
+      src=".\Images\logo small.png"
+      alt="StrongPass Logo"
+      class="center-icon"
+    />
 
-     <!-- Centered Buttons -->
-     <div class="centered-buttons">
-        <button onclick="window.location.href='generate-password.html'">Generate New Password</button>
-        <button onclick="window.location.href='view-passwords.html'">View All Passwords</button>
-        <button onclick="window.location.href='support.html'">Support</button>
-
+    <!-- Centered Buttons -->
+    <div class="centered-buttons">
+      <button onclick="window.location.href='generate-password.html'">
+        Generate New Password
+      </button>
+      <!-- not sure how to fix this... don't know bootstrap -->
+      <button onclick="window.location.href='./html/view-passwords.html'">
+        View All Passwords
+      </button>
+      <button onclick="window.location.href='support.html'">Support</button>
     </div>
 
     <footer>&copy; Copyright 2024</footer>
-
-</body>
+  </body>
 </html>
