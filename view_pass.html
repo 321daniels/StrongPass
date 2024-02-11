@@ -13,7 +13,7 @@
       crossorigin="anonymous"
     />
   </head>
-  
+
   <body style="background-color: lightgray">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -32,10 +32,12 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="Index.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="Index.html"
+                >Home</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="view_pass.html">Password</a>
+              <a class="nav-link" href="view_pass.html">Passwords</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="support.html">Support</a>
@@ -45,63 +47,24 @@
       </div>
     </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
     <section class="passwordLayout">
       <h1>Passwords</h1>
-      <div>
-        <!-- use php to search through existing saved passwords -->
-        <form action="../examplePHP.php">
-          <label for="search">Search:</label>
-          <input type="text" id="search" name="search" />
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
-      <div>
-        <!-- replace each 'generate-password.html' with a password view/options page-->
-        <button onclick="window.location.href='generate-password.html'">
-          Amazon
-        </button>
-      </div>
-      <div>
-        <button onclick="window.location.href='generate-password.html'">
-          Best Buy
-        </button>
-      </div>
-      <div>
-        <button onclick="window.location.href='generate-password.html'">
-          Facebook
-        </button>
-      </div>
-      <div>
-        <button onclick="window.location.href='generate-password.html'">
-          Instagram
-        </button>
-      </div>
-      <div>
-        <button onclick="window.location.href='generate-password.html'">
-          Reddit
-        </button>
-      </div>
-      <div>
-        <button onclick="window.location.href='generate-password.html'">
-          Steam
-        </button>
-      </div>
-      <div>
-        <button onclick="window.location.href='generate-password.html'">
-          X
-        </button>
-      </div>
     </section>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search for a website..."
+      oninput="filterWebsites()"
+    />
+    <div id="buttonsContainer" class="centered-buttons">
+      <!-- site buttons appear here from searchPasswords.js -->
+    </div>
 
-    
+    <script src="searchPasswords.js"></script>
   </body>
 </html>
-
-   
-
-    <footer>&copy; Copyright 2024</footer>
-  </body>
-</html>
-
-
