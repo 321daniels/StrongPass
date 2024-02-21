@@ -11,21 +11,24 @@
         body {
             background-color: lightgray;
         }
+		.passwordLayout h1 {
+			background-color: #f2f2f2;
+		}
         .passwordLayout {
             text-align: center;
-            padding-top: 50px; /* Adjust as needed */
+            padding-top: 50px;
         }
         #searchForm {
             display: flex;
             justify-content: center;
-            margin-top: 20px; /* Adjust as needed */
+            margin-top: 20px;
         }
         #searchInput, button {
-	    margin: 0; /* Reset margin */
-	}
+			margin: 0;
+		}
         .centered-buttons {
             text-align: center;
-            margin-top: 20px; /* Adjust as needed */
+            margin-top: 20px;
         }
         table {
             width: 80%;
@@ -40,6 +43,13 @@
         th {
             background-color: #f2f2f2;
         }
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		tr:nth-child(odd) {
+			background-color: #ffffff;
+		}
     </style>
 </head>
 <body>
