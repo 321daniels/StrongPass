@@ -21,7 +21,7 @@
             margin-top: 20px; /* Adjust as needed */
         }
         #searchInput, button {
-			margin: 0; /* Reset margin */
+	    margin: 0; /* Reset margin */
 		}
         .centered-buttons {
             text-align: center;
