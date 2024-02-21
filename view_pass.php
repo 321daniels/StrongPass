@@ -22,7 +22,7 @@
         }
         #searchInput, button {
 	    margin: 0; /* Reset margin */
-		}
+	}
         .centered-buttons {
             text-align: center;
             margin-top: 20px; /* Adjust as needed */
