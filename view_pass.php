@@ -82,8 +82,13 @@
 
 <!-- PHP Search Form -->
 <form id="searchForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    <input type="text" name="search" id="searchInput" placeholder="Search for a website...">
+    <input type="text" name="search" id="searchInput" placeholder="Search for a website..." value="<?php if(isset($_POST['search'])) { echo $_POST['search']; } ?>">
     <button type="submit">Search</button>
+    <select name="sort" id="sortSelect" onchange="this.form.submit()">
+        <option value="site_asc">Site (A-Z)</option>
+        <option value="site_desc">Site (Z-A)</option>
+        <!-- Add more sorting options as needed -->
+    </select>
 </form>
 
 <!-- PHP Search Results -->
@@ -109,6 +114,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Step 4: Construct and execute SQL query
     $sql = "SELECT * FROM main WHERE Site LIKE '%$search%'";
+
+    // Handle sorting
+    if (isset($_POST['sort'])) {
+        $sort = $_POST['sort'];
+        switch ($sort) {
+            case 'site_asc':
+                $sql .= " ORDER BY Site ASC";
+                break;
+            case 'site_desc':
+                $sql .= " ORDER BY Site DESC";
+                break;
+            // Add more cases for other sorting options if needed
+        }
+    }
+
     $result = $conn->query($sql);
 
     // Step 5: Display search results
