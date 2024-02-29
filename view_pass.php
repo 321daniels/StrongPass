@@ -131,15 +131,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $result = $conn->query($sql);
 
-    // Step 5: Display search results
+    /// Step 5: Display search results
     if ($result->num_rows > 0) {
-        echo "<table>";
-        echo "<tr><th>Site</th><th>UserName</th><th>Password</th><th>LastUpdated</th><th>Note</th><th>URL</th></tr>";
-        while($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["Site"]. "</td><td>" . $row["Username"]. "</td><td>" . $row["Password"]. "</td><td>" . $row["LastUpdated"]. "</td><td>" . $row["Note"]. "</td><td>" . $row["URL"]. "</td></tr>";
-            // You can display other columns as needed
+        echo "<div class='centered-buttons'>";
+        while ($row = $result->fetch_assoc()) {
+        $siteName = $row["Site"];
+        $siteId = $row["MainID"]; // Assuming "id" column uniquely identifies each entry
+    
+        // Create a button with site name and link to a dedicated page
+        echo "<button type='button' onclick=\"window.location.href='view_site.php?id=$siteId'\">$siteName</button>";
         }
-        echo "</table>";
+        echo "</div>";
     } else {
         echo "<p>No results found</p>";
     }

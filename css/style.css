@@ -21,7 +21,15 @@ nav.navbar {
     padding: 5px; /* Add padding to create space around the logo */
 }
 
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
 .centered-buttons {
+    display: flex;
+    justify-content: center;
     text-align: center;
     margin-top: 20px;
 }
@@ -41,6 +49,7 @@ nav.navbar {
 .centered-buttons button:hover {
     background-color: #333; /
 }
+
 
 #searchInput {
     display: block;
