@@ -1,0 +1,25 @@
+h1 {
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.centered-buttons {
+    text-align: center;
+    margin-top: 20px;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.centered-buttons:hover {
+    background-color: #333; /
+}
