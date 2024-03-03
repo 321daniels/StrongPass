@@ -156,17 +156,18 @@
 
         /// Step 5: Display search results
         if ($result->num_rows > 0) {
-            echo "<div class='centered-buttons'>";
-            while ($row = $result->fetch_assoc()) {
-                $siteName = $row["Site"];
-                $siteId = $row["MainID"]; // Assuming "id" column uniquely identifies each entry
-    
-                echo "<button type='button' onclick=\"window.location.href='view_site.php?id=$siteId'\">$siteName</button>";
-            }
-            echo "</div>";
-        } else {
-            echo "<p>No results found</p>";
-        }
+			
+			while ($row = $result->fetch_assoc()) {
+				echo "<div class='centered-buttons'>";
+				$siteName = $row["Site"];
+				$siteId = $row["MainID"]; // Assuming "id" column uniquely identifies each entry
+				$url = $row["URL"];
+				echo "<div style='display: block; margin-bottom: 10px;'><button type='button' style='width: 200px;' onclick=\"window.location.href='view_site.php?id=$siteId'\"><img src='$url/favicon.ico' style='width: 20px; height: 20px;'> $siteName</button>";
+			}
+			echo "</div>";
+		} else {
+			echo "<p>No results found</p>";
+		}
     }
     ?>
 
