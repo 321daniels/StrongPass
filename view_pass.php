@@ -175,7 +175,8 @@
 
         /// Step 5: Display search results
         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+			
+			while ($row = $result->fetch_assoc()) {
 				echo "<div class='centered-buttons'>";
 				$siteName = $row["Site"];
 				$siteId = $row["MainID"]; // Assuming "id" column uniquely identifies each entry
