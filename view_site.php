@@ -1,6 +1,7 @@
 <!-- Access saved data for a specific site -->
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< Updated upstream
 
 <head>
   <meta charset="UTF-8" />
@@ -11,6 +12,26 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
 
+=======
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>StrongPass</title>
+    <link rel="stylesheet" href=".\css\style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+          crossorigin="anonymous"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+            crossorigin="anonymous"></script>
+    <script src="./darkmode.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+>>>>>>> Stashed changes
   <style>
     table {
       margin: 0 auto;
@@ -48,10 +69,17 @@
 
   <?php
   // Establish connection
+<<<<<<< Updated upstream
   $servername = "localhost";
   $username = "test";
   $password = "test";
   $database = "strongpass";
+=======
+    $servername = "localhost"; // Change this if your MySQL server is hosted elsewhere
+    $username = "test"; // MySQL username
+    $password = "test"; // MySQL password
+    $database = "strongpass"; // MySQL database name
+>>>>>>> Stashed changes
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $database);
@@ -88,20 +116,57 @@
     echo "</table>";
 
     // Add buttons section
+<<<<<<< Updated upstream
     echo "<div class='button-container'>";
     echo "<button type='button' class='centered-buttons' onclick='navigator.clipboard.writeText(\"" . $row["Username"] . "\")'>Copy Username</button>";
     echo "<button type='button' class='centered-buttons' onclick='navigator.clipboard.writeText(\"" . $row["Password"] . "\")'>Copy Password</button>";
     echo "<a href='edit_site.php?id=" . $row["MainID"] . "'><button type='button' class='centered-buttons'>Edit</button></a>";
     echo "<a href='" . $row["URL"] . "' target='_blank'><button type='button' class='centered-buttons'>Visit Site</button></a>";
+=======
+    echo "<div class='button-container button'>";
+    echo "<button type='button' id='copyUsernameButton' class='centered-buttons2' onclick='navigator.clipboard.writeText(\"" . $row["Username"] . "\")'>Copy Username</button>";
+    echo "<button type='button' id='copyPasswordButton' class='centered-buttons2' onclick='navigator.clipboard.writeText(\"" . $row["Password"] . "\")'>Copy Password</button>";
+    echo "<a href='edit_site.php?id=" . $row["MainID"] . "'><button type='button' class='centered-buttons2'>Edit</button></a>";
+    echo "<a href='" . $row["URL"] . "' target='_blank'><button type='button' class='centered-buttons2'>Visit Site</button></a>";
+>>>>>>> Stashed changes
     echo "</div>";
   } else {
     echo "<p>Site not found!</p>";
   }
 
+<<<<<<< Updated upstream
   // Close connection
   $conn->close();
   ?>
 
 </body>
 
+=======
+
+
+// Close connection
+$conn->close();
+  ?>
+  <!-- Alert message for when Username or Password are copied to clipboard -->
+  <script>
+      function copiedAlert() {
+        var button = event.target;
+        var buttonId = button.id;
+        var alert = document.createElement("div");
+        alert.className = "alert alert-success";
+        alert.role = "alert";
+        if (buttonId === "copyUsernameButton" ) {
+          alert.textContent = "Username copied to clipboard";
+        } else if (buttonId === "copyPasswordButton") {
+          alert.textContent = "Password copied to clipboard!";
+        }
+        document.body.appendChild(alert);
+      }
+      var copyUsernameButton = document.getElementById("copyUsernameButton");
+      var copyPasswordButton = document.getElementById("copyPasswordButton");
+      copyUsernameButton.addEventListener("click", copiedAlert);
+      copyPasswordButton.addEventListener("click", copiedAlert);
+  </script>
+  </body>
+>>>>>>> Stashed changes
 </html>

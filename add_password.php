@@ -55,10 +55,17 @@
                 echo '<div class="alert alert-danger" role="alert">Please fill in all required fields!</div>';
             } else {
 
+<<<<<<< Updated upstream
                 $servername = "localhost";
                 $username = "test";
                 $password = "test";
                 $database = "strongpass";
+=======
+                $servername = "localhost"; // Change this if your MySQL server is hosted elsewhere
+                $username = "test"; // MySQL username
+                $password = "test"; // MySQL password
+                $database = "strongpass"; // MySQL database name
+>>>>>>> Stashed changes
 
                 $conn = new mysqli($servername, $username, $password, $database);
 

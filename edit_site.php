@@ -38,10 +38,17 @@
 
   <?php
   // Establish connection
+<<<<<<< Updated upstream
   $servername = "localhost";
   $username = "test";
   $password = "test";
   $database = "strongpass";
+=======
+    $servername = "localhost"; // Change this if your MySQL server is hosted elsewhere
+    $username = "test"; // MySQL username
+    $password = "test"; // MySQL password
+    $database = "strongpass"; // MySQL database name
+>>>>>>> Stashed changes
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $database);
@@ -78,7 +85,7 @@
     $sql = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
     $result = $conn->query($sql);
 
-    // Check if update was successful
+    // Display to user if update was successful
     if ($result) {
       echo '<div class="alert alert-success" role="alert">Entry updated successfully!</div>';
     } else {
