@@ -49,8 +49,8 @@ nav.navbar {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none; /* Ensure links maintain the styling */
 }
+
 .centered-buttons2 {
     display: inline-block;
     margin: 10px;
@@ -61,21 +61,10 @@ nav.navbar {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none; /* Ensure links maintain the styling */
-}
-
-.centered-buttons a {
-    text-decoration: none;
-    color: white;
-}
-
-.centered-buttons-link {
-    text-decoration: none;
-    color: white;
 }
 
 .centered-buttons button:hover {
-    background-color: #333; /
+    background-color: #333;
 }
 
 #searchInput {
@@ -101,3 +90,9 @@ footer {
 .form-check-input.custom-checkbox:checked {
     background-color: black;
 }
+ 
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 25%;
+  }

@@ -18,16 +18,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <style>
-      table {
-        margin: 0 auto;
-        border-collapse: collapse;
-        width: 25%;
-      }
-  </style>
 </head>
 
-     <!-- Nav Bar -->
+<body>
+<!-- Nav Bar -->
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="./Index.html">StrongPass</a>
@@ -112,17 +106,32 @@
 
     // Add buttons section
     echo "<div class='button-container button'>";
-    echo "<button type='button' class='centered-buttons2' onclick='navigator.clipboard.writeText(\"" . $row["Username"] . "\")'>Copy Username</button>";
-    echo "<button type='button' class='centered-buttons2' onclick='navigator.clipboard.writeText(\"" . $row["Password"] . "\")'>Copy Password</button>";
+    echo "<button type='button' class='centered-buttons2' onclick='copyUsername(\"" . $row["Username"] . "\")'>Copy Username</button>";
+    echo "<button type='button' class='centered-buttons2' onclick='copyPassword(\"" . $row["Password"] . "\")'>Copy Password</button>";
     echo "<a href='edit_site.php?id=" . $row["MainID"] . "'><button type='button' class='centered-buttons2'>Edit</button></a>";
     echo "<a href='" . $row["URL"] . "' target='_blank'><button type='button' class='centered-buttons2'>Visit Site</button></a>";
     echo "</div>";
-} else {
-    echo "<p>Site not found!</p>";
-}
+    } else {
+        echo "<p>Site not found!</p>";
+    }
 
 // Close connection
 $conn->close();
   ?>
+
+<script>
+      function copyUsername(username) {
+        navigator.clipboard.writeText(username);
+        alert("Username copied!");
+      }
+
+      function copyPassword(password) {
+        navigator.clipboard.writeText(password);
+        alert("Password copied!");
+      }
+    </script>
+
+
   </body>
 </html>
+

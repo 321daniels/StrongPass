@@ -18,6 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./generatedPassword.js"></script>
     </head>
 
       <!-- Nav Bar -->
@@ -89,9 +90,9 @@
         </div>
 
         <div class="mt-3">
-          <button class="centered-buttons2" for="generatedPassword">Generated Password:</button>
+          <button class="centered-buttons2" type="button" onclick="generatePassword()">Generate Password</button>
           <input type="text" class="form-control" id="generatedPassword" readonly>
-          <div class="container mt-2"></div>
+          <div class="container mt-1"></div>
           <button class="centered-buttons2" type="centered-buttons" onclick="copyToClipboard()">Copy</button>
       </div>
       
@@ -101,6 +102,23 @@
     <footer class="mt-5">
       &copy; Copyright 2024 StrongPass. All rights reserved.
     </footer>
+
+    <script>
+      function copyToClipboard() {
+        /* Get the text field */
+        var copyText = document.getElementById("generatedPassword");
+    
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+    
+        /* Alert the copied text */
+        alert("Password copied to clipboard: " + copyText.value);
+      }
+    </script>
 
   </body>
 </html>
