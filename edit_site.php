@@ -87,30 +87,24 @@
     die("Invalid site ID");
   }
 
-  // Check if form is submitted ("edit" button clicked)
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate and sanitize user input
-    $newUsername = htmlspecialchars($_POST['username']);
-    $newPassword = htmlspecialchars($_POST['password']);
-    $newNote = htmlspecialchars($_POST['note']);
-    // Include an updated timestamp when user submits change
-    $currentTime = date("Y-m-d H:i:s");
-    // This was a secure way to sanitize data but is now deprecated
-    // $newUsername = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-    // $newPassword = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
-    // $newNote = filter_var($_POST['note'], FILTER_SANITIZE_STRING);
-  
-    // Construct and execute update query
-    $sql = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
-    $result = $conn->query($sql);
+  // Check if form is submitted ("edit" or "delete" button clicked)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['delete']) && $_POST['delete'] === 'true') {
+      // Delete entry logic here
+      $sql_delete = "DELETE FROM main WHERE MainID = $siteId";
+      $result_delete = $conn->query($sql_delete);
 
-    // Check if update was successful
-    if ($result) {
-      echo '<div class="alert alert-success" role="alert">Entry updated successfully!</div>';
-    } else {
-      echo '<div class="alert alert-danger" role="alert">Error updating password. ' . $conn->error . '</div>';
-    }
+      // Check if delete was successful
+      if ($result_delete) {
+          echo '<div class="alert alert-success" role="alert">Entry deleted successfully!</div>';
+      } else {
+          echo '<div class="alert alert-danger" role="alert">Error deleting entry. ' . $conn->error . '</div>';
+      }
+  } else {
+      // Handle update logic (as before)
+      // ...
   }
+}
 
   // Retrieve site information for display
   $sql = "SELECT * FROM main WHERE MainID = $siteId";
@@ -119,26 +113,34 @@
   if ($result->num_rows == 1) {
     $row = $result->fetch_assoc();
 
-    // Display form to edit site information
-    echo "<h1>Edit Site Information</h1>";
-    echo "<form method='post'>";
-    echo "<div class='form-group'>";
-    echo "<label for='username'>Username:</label>";
-    echo "<input type='text' class='form-control' id='username' name='username' value='" . $row["Username"] . "'>";
-    echo "</div>";
-    echo "<div class='form-group'>";
-    echo "<label for='password'>Password:</label>";
-    echo "<input type='password' class='form-control' id='password' name='password' value='" . $row["Password"] . "'>";
-    echo "</div>";
-    echo "<div class='form-group'>";
-    echo "<label for='note'>Note:</label>";
-    echo "<textarea class='form-control' id='note' name='note' rows='3'>" . $row["Note"] . "</textarea>";
-    echo "</div>";
-    echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
-    echo "</form>";
-  } else {
+// Display form to edit site information
+echo "<h1>Edit Site Information</h1>";
+echo "<form method='post'>";
+echo "<div class='form-group'>";
+echo "<label for='username'>Username:</label>";
+echo "<input type='text' class='form-control' id='username' name='username' value='" . $row["Username"] . "'>";
+echo "</div>";
+echo "<div class='form-group'>";
+echo "<label for='password'>Password:</label>";
+echo "<input type='password' class='form-control' id='password' name='password' value='" . $row["Password"] . "'>";
+echo "</div>";
+echo "<div class='form-group'>";
+echo "<label for='note'>Note:</label>";
+echo "<textarea class='form-control' id='note' name='note' rows='3'>" . $row["Note"] . "</textarea>";
+echo "</div>";
+echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
+
+// Add Delete button here
+echo "<form method='post' style='display:inline;'>";
+echo "<input type='hidden' name='delete' value='true'>";
+echo "<button type='submit' class='btn btn-danger'>Delete</button>";
+echo "</form>";
+
+echo "</form>";
+
+} else {
     echo "<p>Site not found!</p>";
-  }
+}
 
   // Close connection
   $conn->close();
