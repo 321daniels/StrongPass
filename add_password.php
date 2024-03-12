@@ -80,7 +80,7 @@
             } else {
 
                 $servername = "localhost"; // Change this if your MySQL server is hosted elsewhere
-                $username = "root"; // MySQL username
+                $username = "test"; // MySQL username
                 $password = "test"; // MySQL password
                 $database = "strongpass"; // MySQL database name
 

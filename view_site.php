@@ -66,7 +66,7 @@
   <?php
   // Establish connection
     $servername = "localhost"; // Change this if your MySQL server is hosted elsewhere
-    $username = "root"; // MySQL username
+    $username = "test"; // MySQL username
     $password = "test"; // MySQL password
     $database = "strongpass"; // MySQL database name
 
@@ -108,6 +108,7 @@
     echo "<div class='button-container button'>";
     echo "<button type='button' class='centered-buttons2' onclick='copyUsername(\"" . $row["Username"] . "\")'>Copy Username</button>";
     echo "<button type='button' class='centered-buttons2' onclick='copyPassword(\"" . $row["Password"] . "\")'>Copy Password</button>";
+    echo "<button type='button' class='centered-buttons2' onclick='evalPasswordStrength(\"" . $row["Password"] . "\")'>Check Password Strength</button>";
     echo "<a href='edit_site.php?id=" . $row["MainID"] . "'><button type='button' class='centered-buttons2'>Edit</button></a>";
     echo "<a href='" . $row["URL"] . "' target='_blank'><button type='button' class='centered-buttons2'>Visit Site</button></a>";
     echo "</div>";
@@ -128,6 +129,54 @@ $conn->close();
       function copyPassword(password) {
         navigator.clipboard.writeText(password);
         alert("Password copied!");
+      }
+
+      function evalPasswordStrength(password) {
+        
+        // Password strength criterion:
+        // STRONG: 12+ characters, including uppercase, lowercase, numeric, and special characters.
+        // MEDIUM: 8+ characters, with at least 2 of the following: uppercase, lowercase, numeric, and special characters.
+        // WEAK: Does not adhere to aformentioned criterion.        
+        
+        const strength = {
+          weak: 0,
+          medium: 2,
+          strong: 4
+        };
+
+        let score = 0;
+
+        // Checks length requirements
+        if (password.length >= 12) {
+          score += 2;
+        } else if (password.length >= 8) {
+          score += 1;
+        }
+
+        // checks character requirements
+        const hasUpper = /[A-Z]/.test(password);
+        const hasLower = /[a-z]/.test(password);
+        const hasNums = /[0-9]/.test(password);
+        // characters that are not alphanumeric
+        const hasSpecial = /[^a-zA-Z0-9]/.test(password);
+
+        // if the password contains uppercase, lowercase, number, and special character
+        if (hasUpper && hasLower && hasNums && hasSpecial) {
+          score += 2;
+        // if the password has at least two of the following: uppercase, lowercase, number, or special character
+        } else if (hasUpper + hasLower + hasNums + hasSpecial >= 2) {
+          score += 1;
+        }
+
+        // Alert dialog containing strength measurement
+        if (score < 2) {
+          alert("Password strength: WEAK");
+        } else if (score < 4) {
+          alert("Password strength: MEDIUM");
+        } else if (score == 4) {
+          alert("Password strength: STRONG");
+        }
+
       }
     </script>
 
