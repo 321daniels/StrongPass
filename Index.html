@@ -72,7 +72,35 @@
       <button onclick="window.location.href='generate_pass.html'">Generate New Password</button>
       <button onclick="window.location.href='view_pass.php'">View All Passwords</button>
       <button onclick="window.location.href='support.html'">Support</button>
+	  <button onclick="downloadCSV()">Download CSV File</button>
+	  <button onclick="uploadCSV()">Upload CSV File</button>
     </div>
+	<script>
+        function downloadCSV() {
+            window.location.href = 'download.php';
+        }
+    </script>
+	<script>
+        function uploadCSV() {
+            var fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.onchange = function() {
+                var file = fileInput.files[0];
+                var formData = new FormData();
+                formData.append("fileToUpload", file);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "upload.php", true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        alert(xhr.responseText); // Show response from server
+                    }
+                };
+                xhr.send(formData);
+            };
+            fileInput.click();
+        }
+    </script>
 </div>
 
     <footer>&copy; Copyright 2024</footer>
