@@ -134,16 +134,10 @@ $conn->close();
       function evalPasswordStrength(password) {
         
         // Password strength criterion:
-        // STRONG: 12+ characters, including uppercase, lowercase, numeric, and special characters.
-        // MEDIUM: 8+ characters, with at least 2 of the following: uppercase, lowercase, numeric, and special characters.
-        // WEAK: Does not adhere to aformentioned criterion.        
+        // STRONG: score = 4        12+ characters, including uppercase, lowercase, numeric, and special characters. 
+        // MEDIUM: 2 <= score < 4   8+ characters, with at least 2 of the following: uppercase, lowercase, numeric, and special characters. 
+        // WEAK:   score < 2        Does not adhere to aformentioned criterion.       
         
-        const strength = {
-          weak: 0,
-          medium: 2,
-          strong: 4
-        };
-
         let score = 0;
 
         // Checks length requirements

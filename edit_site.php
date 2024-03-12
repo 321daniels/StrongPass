@@ -137,6 +137,7 @@
         echo "<div class='form-group'>";
         echo "<label for='password'>Password:</label>";
         echo "<input type='password' class='form-control' id='password' name='password' value='" . $row["Password"] . "'>";
+        echo "<span id='strength-message'></span>"; // password strength text here
         echo "</div>";
         echo "<div class='form-group'>";
         echo "<label for='note'>Note:</label>";
@@ -159,5 +160,63 @@
     ?>
 </div>
 
+    <script>
+        
+        // grab the HTML elements for password and strength message
+        const passwordInput = document.getElementById('password');
+        const strengthMessage = document.getElementById('strength-message');
+
+        function strengthCheck() {
+            const password = passwordInput.value;
+
+            let score = 0;
+
+            // Checks length requirements
+            if (password.length >= 12) {
+            score += 2;
+            } else if (password.length >= 8) {
+            score += 1;
+            }
+
+            // checks character requirements
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasNums = /[0-9]/.test(password);
+            // characters that are not alphanumeric
+            const hasSpecial = /[^a-zA-Z0-9]/.test(password);
+
+            // if the password contains uppercase, lowercase, number, and special character
+            if (hasUpper && hasLower && hasNums && hasSpecial) {
+            score += 2;
+            // if the password has at least two of the following: uppercase, lowercase, number, or special character
+            } else if (hasUpper + hasLower + hasNums + hasSpecial >= 2) {
+            score += 1;
+            }
+
+            // strength measurement text
+            if (score < 2) {
+            strength = "Weak";
+            // color formatting for password strength
+            strengthClass = "text-danger";
+            } else if (score < 4) {
+            strength = "Medium";
+            strengthClass = "text-warning";
+            } else if (score == 4) {
+            strength = "Strong";
+            strengthClass = 'text-success';
+            }
+
+            // display the password strength text
+            strengthMessage.textContent = `Password strength: ${strength}`;
+            strengthMessage.className = strengthClass;
+        }
+
+        // check password strength after text entry
+        passwordInput.addEventListener('input', strengthCheck);
+
+        // check password strength of current password immediately upon the page loading
+        document.addEventListener("DOMContentLoaded", strengthCheck);
+        
+    </script>
 </body>
 </html>
