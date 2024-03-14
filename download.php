@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$username = "test";
+$username = "root";
 $password = "test";
 $dbname = "strongpass";
 
@@ -25,14 +25,14 @@ if (!$result) {
 $filename = "output.csv";
 
 // Header for CSV file
-$header = "MainID,UserID,Site,Username,Password,LastUpdated,Note,URL,VIewerID\n";
+$header = "MainID,UserID,Site,Username,Password,LastUpdated,Note,URL,VIewerID,Category\n";
 
 // Data for CSV file
 $data = "";
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Assuming no special characters in the fields
-        $data .= $row['MainID'] . "," . $row['UserID'] . "," . $row['Site'] . "," . $row['Username'] . "," . $row['Password'] . "," . $row['LastUpdated'] . "," . $row['Note'] . "," . $row['URL'] . "," . $row['VIewerID'] . "\n";
+        $data .= $row['MainID'] . "," . $row['UserID'] . "," . $row['Site'] . "," . $row['Username'] . "," . $row['Password'] . "," . $row['LastUpdated'] . "," . $row['Note'] . "," . $row['URL'] . "," . $row['VIewerID'] ."," . $row['Category'] . "\n";
     }
 }
 
