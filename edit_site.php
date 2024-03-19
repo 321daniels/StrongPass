@@ -17,6 +17,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./generatedPassword.js"></script>
 </head>
 
 <body>
@@ -145,7 +146,7 @@
         echo "</div>";
         echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
         echo "</form>";
-
+        
         // Add Delete button here
         echo "<form method='post' style='display:inline;'>";
         echo "<input type='hidden' name='delete' value='true'>";
@@ -160,12 +161,70 @@
     ?>
 </div>
 
+<!-- Password generator form, hidden until user clicks Show Password Generator button -->
+<div class="container mt-4">
+    <button type="button" class="btn btn-primary" id="showPasswordGenerator">Show Password Generator</button>
+    <form id="passwordGeneratorForm" style="display: none;">
+        <h2>Password Generator</h2>
+        <div class="mb-3">
+          <label for="passwordLength" class="form-label">Password Length:</label>
+          <input type="number" class="form-control" id="passwordLength" min="6" max="64" value="12" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="includeUppercase" class="form-check-label">
+            <input type="checkbox" class="form-check-input custom-checkbox" id="includeUppercase"> Include Uppercase
+          </label>
+        </div>
+
+        <div class="mb-3">
+          <label for="includeNumbers" class="form-check-label">
+            <input type="checkbox" class="form-check-input custom-checkbox" id="includeNumbers"> Include Numbers
+          </label>
+        </div>
+
+        <div class="mb-3">
+          <label for="includeSymbols" class="form-check-label">
+            <input type="checkbox" class="form-check-input custom-checkbox" id="includeSymbols"> Include Symbols
+          </label>
+        </div>
+
+        <div class="mt-3">
+          <button class="centered-buttons2" type="button" onclick="generatePassword()">Generate Password</button>
+          <input type="text" class="form-control" id="generatedPassword" readonly>
+          <div class="container mt-1"></div>
+          <!-- Modified from generatedPassword... needed to change functionality to insert into the input/form -->
+          <button type="button" class="btn btn-primary" id="insertGeneratedPassword">Insert Generated Password</button>
+        </div>
+    </form>
+</div>
+
     <script>
         
         // grab the HTML elements for password and strength message
         const passwordInput = document.getElementById('password');
         const strengthMessage = document.getElementById('strength-message');
 
+        // Function to toggle the password generator form upon button click
+        function showPasswordGenerator() {
+            var passwordGeneratorForm = document.getElementById("passwordGeneratorForm");
+            if (passwordGeneratorForm.style.display === "none") {
+                passwordGeneratorForm.style.display = "block";
+            } else {
+                passwordGeneratorForm.style.display = "none";
+                }
+            }
+            
+        // Function to insert the generated password into the form
+        function useGeneratedPassword() {
+            var newGeneratedPassword = document.getElementById("generatedPassword").value;
+            var passwordField = document.getElementById("password");
+            passwordField.value = newGeneratedPassword;
+            alert("Generated password has been inserted into the form. Click 'Save Changes' to apply the new password!");
+            strengthCheck(newGeneratedPassword);
+            }
+    
+        // Function to actively check the strength of a password as it is typed
         function strengthCheck() {
             const password = passwordInput.value;
 
@@ -216,7 +275,12 @@
 
         // check password strength of current password immediately upon the page loading
         document.addEventListener("DOMContentLoaded", strengthCheck);
-        
+
+        // button click to trigger the password generator form visibility
+        document.getElementById("showPasswordGenerator").addEventListener("click", showPasswordGenerator);
+
+        // button to copy the generated password into the form
+        document.getElementById("insertGeneratedPassword").addEventListener("click", useGeneratedPassword);
     </script>
 </body>
 </html>

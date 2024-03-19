@@ -18,6 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./generatedPassword.js"></script>
   </head>
 
     <!-- Nav Bar -->
@@ -116,6 +117,8 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
                 <input type="password" name="password" id="password" class="form-control" required>
+                <!-- password strength text here -->
+                <span id='strength-message'></span>  
             </div>
             <div class="mb-3">
                 <label for="note" class="form-label">Note (optional):</label>
@@ -128,6 +131,132 @@
             <button type="submit" class="btn btn-primary">Add Password</button>
         </form>
     </main>
+
+          <!-- Password generator form, hidden until user clicks Show Password Generator button -->
+        <div class="container mt-4">
+            <button type="button" class="btn btn-primary" id="showPasswordGenerator">Show Password Generator</button>
+            <form id="passwordGeneratorForm" style="display: none;">
+                <h2>Password Generator</h2>
+                <div class="mb-3">
+                  <label for="passwordLength" class="form-label">Password Length:</label>
+                  <input type="number" class="form-control" id="passwordLength" min="6" max="64" value="12" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="includeUppercase" class="form-check-label">
+                    <input type="checkbox" class="form-check-input custom-checkbox" id="includeUppercase"> Include Uppercase
+                  </label>
+                </div>
+
+                <div class="mb-3">
+                  <label for="includeNumbers" class="form-check-label">
+                    <input type="checkbox" class="form-check-input custom-checkbox" id="includeNumbers"> Include Numbers
+                  </label>
+                </div>
+
+                <div class="mb-3">
+                  <label for="includeSymbols" class="form-check-label">
+                    <input type="checkbox" class="form-check-input custom-checkbox" id="includeSymbols"> Include Symbols
+                  </label>
+                </div>
+
+                <div class="mt-3">
+                  <button class="centered-buttons2" type="button" onclick="generatePassword()">Generate Password</button>
+                  <input type="text" class="form-control" id="generatedPassword" readonly>
+                  <div class="container mt-1"></div>
+                  <!-- Modified from generatedPassword... needed to change functionality to insert into the input/form -->
+                  <button type="button" class="btn btn-primary" id="insertGeneratedPassword">Insert Generated Password</button>
+                </div>
+            </form>
+        </div>
+
+    
+  <script>
+    
+    // grab the HTML elements for password and strength message
+    const passwordInput = document.getElementById('password');
+    const strengthMessage = document.getElementById('strength-message');
+    
+    // Function to toggle the password generator form upon button click
+    function showPasswordGenerator() {
+            var passwordGeneratorForm = document.getElementById("passwordGeneratorForm");
+            if (passwordGeneratorForm.style.display === "none") {
+                passwordGeneratorForm.style.display = "block";
+            } else {
+                passwordGeneratorForm.style.display = "none";
+                }
+            }
+
+    // Function to insert the generated password into the form
+    function useGeneratedPassword() {
+            var newGeneratedPassword = document.getElementById("generatedPassword").value;
+            var passwordField = document.getElementById("password");
+            passwordField.value = newGeneratedPassword;
+            alert("Generated password has been inserted into the form. Click 'Add Password' to apply the new password!");
+            strengthCheck(newGeneratedPassword);
+            }
+
+    // Function to actively check the strength of a password as it is typed
+    function strengthCheck() {
+            const password = passwordInput.value;
+
+            let score = 0;
+
+            // Checks length requirements
+            if (password.length >= 12) {
+            score += 2;
+            } else if (password.length >= 8) {
+            score += 1;
+            }
+
+            // checks character requirements
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasNums = /[0-9]/.test(password);
+            // characters that are not alphanumeric
+            const hasSpecial = /[^a-zA-Z0-9]/.test(password);
+
+            // if the password contains uppercase, lowercase, number, and special character
+            if (hasUpper && hasLower && hasNums && hasSpecial) {
+            score += 2;
+            // if the password has at least two of the following: uppercase, lowercase, number, or special character
+            } else if (hasUpper + hasLower + hasNums + hasSpecial >= 2) {
+            score += 1;
+            }
+
+            // strength measurement text
+            if (score < 2) {
+            strength = "Weak";
+            // color formatting for password strength
+            strengthClass = "text-danger";
+            } else if (score < 4) {
+            strength = "Medium";
+            strengthClass = "text-warning";
+            } else if (score == 4) {
+            strength = "Strong";
+            strengthClass = 'text-success';
+            }
+
+            // display the password strength text
+            strengthMessage.textContent = `Password strength: ${strength}`;
+            strengthMessage.className = strengthClass;
+        }
+
+    // check password strength after text entry
+    passwordInput.addEventListener('input', strengthCheck);
+
+    // check password strength of current password immediately upon the page loading
+    document.addEventListener("DOMContentLoaded", strengthCheck);
+
+    // button click to trigger the password generator form visibility
+    document.getElementById("showPasswordGenerator").addEventListener("click", showPasswordGenerator);
+    
+    // button to copy the generated password into the form
+    document.getElementById("insertGeneratedPassword").addEventListener("click", useGeneratedPassword);
+
+
+
+  </script>
   
 </body>
 </html>
