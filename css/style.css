@@ -96,3 +96,7 @@ table {
     border-collapse: collapse;
     width: 25%;
   }
+
+.update-warning hidden {
+    display: none;
+}

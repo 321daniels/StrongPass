@@ -95,6 +95,12 @@
   if ($result->num_rows == 1) {
     $row = $result->fetch_assoc();
 
+    // Calculate number of days since last update
+    $lastUpdated = strtotime($row["LastUpdated"]); //converts the last updated time to a Unix timestamp
+    $today = time(); // current Unix timestamp
+    // Take the difference between the current date and last updated timestamp, and divide by the number of seconds in a day
+    $daysSinceUpdate = floor(($today - $lastUpdated) / (60 * 60 * 24));
+
     // Display site information
     echo "<h1>" . $row["Site"] . "</h1>";
     echo "<table>";
@@ -103,6 +109,18 @@
     echo "<tr><td>Last Updated</td><td>" . $row["LastUpdated"] . "</td></tr>";
     echo "<tr><td>Note</td><td>" . $row["Note"] . "</td></tr>";
     echo "</table>";
+
+    // If no updates have been made in 15 days, alert the user.
+    // NEEDS CSS FORMATTING
+    if ($daysSinceUpdate >= 15) { // TODO: we can change this value to anything we want. For instance, our proposed admin user might want the ability to change this.
+      echo '<div class="update-warning">Warning! Password last updated ' . $daysSinceUpdate . ' days ago.</div>';
+    }
+
+    // Keep this if we want a browser alert to appear
+    // if ($daysSinceUpdate >= 15) {
+    //   echo "<script>alert('Alert! This password has not been updated in " . $daysSinceUpdate . " days. It is recommended that you change your password for security purposes.');</script>";
+    // }
+
 
     // Add buttons section
     echo "<div class='button-container button'>";
@@ -116,6 +134,7 @@
         echo "<p>Site not found!</p>";
     }
 
+    
 // Close connection
 $conn->close();
   ?>

@@ -152,7 +152,18 @@ if ($result->num_rows > 0) {
         $siteName = $row["Site"];
         $siteId = $row["MainID"]; // Assuming "id" column uniquely identifies each entry
         $url = $row["URL"];
-        echo "<div style='display: block; margin-bottom: 10px;'><button type='button' style='width: 200px;' onclick=\"window.location.href='view_site.php?id=$siteId'\"><img src='$url/favicon.ico' style='width: 20px; height: 20px;'> $siteName</button>";
+
+        // Calculate days since update and set icon variable
+        $lastUpdated = strtotime($row["LastUpdated"]);
+        $today = time();
+        $daysSinceUpdate = floor(($today - $lastUpdated) / (60*60*24));
+        $icon = "";
+        // TODO: Change the amount of days from 15 to whatever is desirable for password security policy
+        if ($daysSinceUpdate >= 15) {
+          $icon = "<img src='./Images/alert_triangle.png'>";
+        }
+        echo "<div style='display: block; margin-bottom: 10px;'>";
+        echo  "<button type='button' style='width: 200px;' onclick=\"window.location.href='view_site.php?id=$siteId'\">" . $icon . "<img src='$url/favicon.ico' style='width: 20px; height: 20px;'> $siteName</button>";
     }
     echo "</div>";
 } else {
