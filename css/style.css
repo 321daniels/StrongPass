@@ -39,6 +39,7 @@ nav.navbar {
     justify-content: center;
     text-align: center;
     margin-top: 20px;
+	flex-wrap: wrap;
 }
 
 .centered-buttons button {
