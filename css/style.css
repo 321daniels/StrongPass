@@ -25,11 +25,13 @@ nav.navbar {
     display: flex; /* Make the form elements inline */
     justify-content: space-between; /* Distribute elements evenly with space between */
     align-items: center; /* Vertically align elements at the center */
+	flex-wrap: wrap;
 }
 
 .button-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .centered-buttons {
