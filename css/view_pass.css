@@ -1,45 +1,19 @@
-.passwordLayout {
-    text-align: center;
-    padding-top: 50px;
-}
-
-#searchForm {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-#searchInput,
-button {
-    margin: 0;
-}
-
-.centered-buttons {
-    text-align: center;
-    margin-top: 20px;
-}
-
-table {
-    width: 80%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th,
-td {
-    padding: 8px;
-    border: 1px solid #ddd; /* Add a border for better readability */
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(odd) {
-    background-color: #ffffff;
-}
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1;}
+.centered-buttons {text-align: center;margin-top: 20px;}
+.centered-buttons button {
+    background-color: #8db8da; /* Soft blue color */
+    color: black;
+    padding: 10px 16px; /* Smaller padding */
+    margin: 8px 4px; /* Smaller margin */
+    border: none;
+    cursor: pointer;
+    width: 200px; /* Fixed width */
+    border-radius: 4px;
+    font-size: 14px; /* Smaller font size */}
+.centered-buttons button:hover {background-color: #6b9dbb; /* Darker shade of blue on hover */}
+.search-container {text-align: center;margin-bottom: 20px;}
+.search-container form {display: inline-block;}
+.search-container select {margin-left: 10px; /* Adjust spacing between elements if needed */}

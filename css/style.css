@@ -1,105 +1,46 @@
-body {
-    background-color: lightgray; /* Set the background color to light gray */
-}
-
-h1 {
-    font-family: sans-serif;
+body,h1 {font-family: "Poppins", sans-serif; font-size: 48px;}
+h2,h3,h4,h5 {font-family: "Poppins", sans-serif;}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1;}
+.centered-buttons {text-align: center;margin-top: 20px;}
+.centered-buttons button {
+    background-color: #8db8da; /* Soft blue color */
     color: black;
-    text-align: center;
-    background-color: darkgray;
-    border: 3px solid black;
-}
-
-nav.navbar {
-    text-align: center;
-}
-
-.center-icon {
-    display: block;
-    margin: 0 auto;
-    max-width: 15%; /* Adjust the size as needed */
-    padding: 5px; /* Add padding to create space around the logo */
-}
-
-#searchForm {
-    display: flex; /* Make the form elements inline */
-    justify-content: space-between; /* Distribute elements evenly with space between */
-    align-items: center; /* Vertically align elements at the center */
-	flex-wrap: wrap;
-}
-
-.button-container {
+    padding: 10px 16px; /* Smaller padding */
+    margin: 8px 4px; /* Smaller margin */
+    border: none;
+    cursor: pointer;
+    width: 200px; /* Fixed width */
+    border-radius: 4px;
+    font-size: 14px; /* Smaller font size */}
+.centered-buttons button:hover {background-color: #6b9dbb; /* Darker shade of blue on hover */}
+.search-container {text-align: center;margin-bottom: 20px;}
+.search-container form {display: inline-block;}
+.search-container select {margin-left: 10px; /* Adjust spacing between elements if needed */}
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.centered-buttons {
-    display: flex;
-    justify-content: center;
     text-align: center;
-    margin-top: 20px;
-	flex-wrap: wrap;
-}
-
-.centered-buttons button {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.centered-buttons2 {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.centered-buttons button:hover {
-    background-color: #333;
-}
-
-#searchInput {
-    display: block;
-    margin: 0 auto;
-    width: 300px;
-}
-
-footer {
-    text-align: right;
-    padding: 10px;
-}
-
-.btn-custom {
-    background-color: black;
-    color: rgb(8, 8, 8);
-}
-
-.form-check-input.custom-checkbox {
-    background-color: gray;
-}
-
-.form-check-input.custom-checkbox:checked {
-    background-color: black;
-}
- 
-table {
-    margin: 0 auto;
-    border-collapse: collapse;
-    width: 25%;
   }
-
-.update-warning hidden {
-    display: none;
-}
+  .center-icon {
+    margin-top: 20px; /* Adjust margin as needed */
+    width: 250px; /* Set width to larger size */
+    height: auto; /* Maintain aspect ratio */
+  }
+  .text-center {
+    text-align: center;
+  }  
+  footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+  }
+  @media screen and (max-width: 1000px) {
+    h1 {
+      margin-top: 80px; /* Adjusted margin for smaller screens */
+    }
+  }
+  
