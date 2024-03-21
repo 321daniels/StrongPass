@@ -124,3 +124,12 @@ body {
     color: green;
 }
 
+.input-container {
+    display: flex;
+    align-items: center; /* Vertically center contents */
+}
+
+.input-container input[type='password'] {
+    flex: 1; /* Grow to fill available space */
+    margin-right: 5px; /* Adjust margin between input field and button */
+}

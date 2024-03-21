@@ -1,8 +1,35 @@
-body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-body {font-size:16px;}
-.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
-.w3-half img:hover{opacity:1;}
-.centered-buttons {text-align: center;margin-top: 20px;}
+/* Font Styles */
+body, h1 {
+    font-family: "Poppins", sans-serif;
+}
+
+h2, h3, h4, h5 {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Body */
+body {
+    font-size: 16px;
+}
+
+/* Image Styling */
+.w3-half img {
+    margin-bottom: -6px;
+    margin-top: 16px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.w3-half img:hover {
+    opacity: 1;
+}
+
+/* Centered Buttons */
+.centered-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
 .centered-buttons button {
     background-color: #8db8da; /* Soft blue color */
     color: black;
@@ -12,8 +39,54 @@ body {font-size:16px;}
     cursor: pointer;
     width: 200px; /* Fixed width */
     border-radius: 4px;
-    font-size: 14px; /* Smaller font size */}
-.centered-buttons button:hover {background-color: #6b9dbb; /* Darker shade of blue on hover */}
-.search-container {text-align: center;margin-bottom: 20px;}
-.search-container form {display: inline-block;}
-.search-container select {margin-left: 10px; /* Adjust spacing between elements if needed */}
+    font-size: 14px; /* Smaller font size */
+}
+
+.centered-buttons button:hover {
+    background-color: #6b9dbb; /* Darker shade of blue on hover */
+}
+
+/* Search Container */
+.search-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-container form {
+    display: inline-block;
+}
+
+.search-container select {
+    margin-left: 10px; /* Adjust spacing between elements if needed */
+}
+
+/* Media Query */
+@media screen and (max-width: 1000px) {
+    h1 {
+        margin-top: 80px; /* Adjusted margin for smaller screens */
+    }
+}
+
+/* Grid View Styles */
+.grid-view .siteItem {
+    display: inline-block;
+    width: 200px; /* Adjust width as needed */
+    margin: 10px;
+    text-align: center;
+}
+
+.grid-view .siteItem button {
+    width: 100%;
+}
+
+.grid-view .centered-buttons {
+    text-align: left; /* Adjust alignment as needed */
+}
+
+.grid-view .centered-buttons button {
+    width: auto; /* Adjust width as needed */
+}
+
+.grid-view .centered-buttons button:hover {
+    background-color: #8db8da; /* Change hover color as needed */
+}

@@ -83,7 +83,7 @@ echo "<div class='site-info-container'>";
 echo "<h1>" . htmlspecialchars($row["Site"]) . "</h1>";
 echo "<div class='site-info'>";
 echo "<p><strong>Username:</strong> " . htmlspecialchars($row["Username"]) . "</p>";
-echo "<p><strong>Password:</strong> " . htmlspecialchars($row["Password"]) . "</p>"; // Mask password for security
+echo "<p><strong>Password:</strong> <span id='password'>" . str_repeat('*', strlen($row["Password"])) . "</span> <button onclick='togglePasswordVisibility()' class='btn btn-sm'><img src='Images/show_icon.png' alt='Show' id='showIcon' style='width: 20px; height: 20px;'></button></p>"; // Mask password for security
 echo "<p><strong>Last Updated:</strong> " . htmlspecialchars($row["LastUpdated"]) . "</p>";
 echo "<p><strong>Note:</strong> " . htmlspecialchars($row["Note"]) . "</p>";
 echo "</div>";
@@ -183,6 +183,22 @@ function w3_open() {
 function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+<script>
+function togglePasswordVisibility() {
+    var passwordField = document.getElementById('password');
+    var button = document.getElementById('showIcon');
+    if (passwordField.innerHTML == '<?php echo htmlspecialchars($row["Password"]); ?>') {
+        passwordField.innerHTML = '<?php echo str_repeat('*', strlen($row["Password"])); ?>';
+        button.src = 'Images/show_icon.png';
+        button.alt = 'Show';
+    } else {
+        passwordField.innerHTML = '<?php echo htmlspecialchars($row["Password"]); ?>';
+        button.src = 'Images/hide_icon.png';
+        button.alt = 'Hide';
+    }
 }
 </script>
 

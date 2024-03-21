@@ -114,9 +114,9 @@
 
         echo "<div class='form-group'>";
         echo "<label for='password'>Password:</label>";
-        echo "<input type='password' class='form-control' id='password' name='password' value='" . $row["Password"] . "'>";
+        echo "<input type='text' class='form-control' id='password' name='password' value='" . htmlspecialchars($row["Password"]) . "'>";
         echo "<span id='strength-message' class='text-danger' style='margin-left: 10px;'></span>"; // password strength text here
-        echo "</div>";
+        echo "</div>";  
         
         echo "<div class='form-group'>";
         echo "<label for='note'>Note:</label>";
@@ -280,6 +280,7 @@
       captionText.innerHTML = element.alt;
     }
     </script>
+
     <script src="generatedPassword.js"></script>
 </body>
 </html>

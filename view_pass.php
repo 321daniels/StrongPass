@@ -34,9 +34,9 @@
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:340px;margin-right:40px">
+<div class="w3-main" style="margin-left: 340px; margin-right: 40px;">
   <div class="container mt-4">
-    <h1>Passwords</h1>
+    <h1 style="text-align: center;">Passwords</h1>
 
     <!-- Add a new password (redirects) -->
     <section class="passwordLayout centered-buttons">
@@ -45,26 +45,30 @@
 
     <!-- PHP Search Form with Category Filter -->
     <div class="search-container">
-    <form id="searchForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <input type="text" name="search" id="searchInput" placeholder="Search for a website..."
-            value="<?php if (isset($_POST['search'])) {
-                echo $_POST['search'];
-            } ?>">
-        <button type="submit">Search</button>
-        <select name="sort" id="sortSelect" onchange="this.form.submit()">
-            <option value="site_asc" <?php if(isset($_POST['sort']) && $_POST['sort'] == 'site_asc') echo 'selected'; ?>>Site (A-Z)</option>
-            <option value="site_desc" <?php if(isset($_POST['sort']) && $_POST['sort'] == 'site_desc') echo 'selected'; ?>>Site (Z-A)</option>
-            <!-- Add more sorting options as needed -->
-        </select>
-        <!-- New Category Filter -->
-        <select name="category" id="categorySelect" onchange="this.form.submit()">
-            <option value="all" <?php if(isset($_POST['category']) && $_POST['category'] == 'all') echo 'selected'; ?>>All Categories</option>
-            <option value="gaming" <?php if(isset($_POST['category']) && $_POST['category'] == 'gaming') echo 'selected'; ?>>Gaming</option>
-            <option value="education" <?php if(isset($_POST['category']) && $_POST['category'] == 'education') echo 'selected'; ?>>Education</option>
-            <option value="social" <?php if(isset($_POST['category']) && $_POST['category'] == 'social') echo 'selected'; ?>>Social Media</option>
-            <option value="streaming" <?php if(isset($_POST['category']) && $_POST['category'] == 'streaming') echo 'selected'; ?>>Streaming Service</option>
-        </select>
-    </form>
+        <form id="searchForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <input type="text" name="search" id="searchInput" placeholder="Search for a website..."
+                value="<?php if (isset($_POST['search'])) { echo $_POST['search']; } ?>">
+            <button type="submit">Search</button>
+            <select name="sort" id="sortSelect" onchange="this.form.submit()">
+                <option value="site_asc" <?php if(isset($_POST['sort']) && $_POST['sort'] == 'site_asc') echo 'selected'; ?>>Site (A-Z)</option>
+                <option value="site_desc" <?php if(isset($_POST['sort']) && $_POST['sort'] == 'site_desc') echo 'selected'; ?>>Site (Z-A)</option>
+                <!-- Add more sorting options as needed -->
+            </select>
+            <!-- New Category Filter -->
+            <select name="category" id="categorySelect" onchange="this.form.submit()">
+                <option value="all" <?php if(isset($_POST['category']) && $_POST['category'] == 'all') echo 'selected'; ?>>All Categories</option>
+                <option value="gaming" <?php if(isset($_POST['category']) && $_POST['category'] == 'gaming') echo 'selected'; ?>>Gaming</option>
+                <option value="education" <?php if(isset($_POST['category']) && $_POST['category'] == 'education') echo 'selected'; ?>>Education</option>
+                <option value="social" <?php if(isset($_POST['category']) && $_POST['category'] == 'social') echo 'selected'; ?>>Social Media</option>
+                <option value="streaming" <?php if(isset($_POST['category']) && $_POST['category'] == 'streaming') echo 'selected'; ?>>Streaming Service</option>
+            </select>
+        </form>
+        <!-- Toggle View Button -->
+        <button type="button" id="toggleViewButton" style="padding: 5px;" onclick="toggleView()">
+          <img src="Images/grid_icon.png" alt="Grid View" id="toggleImageView" style="width: 20px; height: 20px;">
+        </button>
+      </div>
+    <div id="searchResults" class="row-view"><!-- Assuming initial view is row view --></div>
 </div>
 
     <!-- PHP Password Display -->
@@ -97,12 +101,12 @@ if (!empty($search)) {
 
 // Add category filter
 if ($category !== 'all') {
-  if (empty($search)) {
-      $sql .= " WHERE";
-  } else {
-      $sql .= " AND";
-  }
-  $sql .= " `Category` = '" . $conn->real_escape_string($category) . "'";
+    if (empty($search)) {
+        $sql .= " WHERE";
+    } else {
+        $sql .= " AND";
+    }
+    $sql .= " `Category` = '" . $conn->real_escape_string($category) . "'";
 }
 
 // Handle sorting
@@ -120,7 +124,8 @@ $result = $conn->query($sql);
 
 // Step 5: Display search results
 if ($result->num_rows > 0) {
-    echo "<div class='centered-buttons'>";
+    // Add toggle button for view
+    echo "<div id='siteContainer' class='centered-buttons'>";
     while ($row = $result->fetch_assoc()) {
         $siteName = $row["Site"];
         $siteId = $row["MainID"]; // Assuming "id" column uniquely identifies each entry
@@ -133,10 +138,11 @@ if ($result->num_rows > 0) {
         $icon = "";
         // TODO: Change the amount of days from 15 to whatever is desirable for password security policy
         if ($daysSinceUpdate >= 15) {
-          $icon = "<img src='./Images/alert_triangle.png'>";
+            $icon = "<img src='./Images/alert_triangle.png'>";
         }
-        echo "<div style='display: block; margin-bottom: 10px;'>";
-        echo  "<button type='button' style='width: 200px;' onclick=\"window.location.href='view_site.php?id=$siteId'\">" . $icon . "<img src='$url/favicon.ico' style='width: 20px; height: 20px;'> $siteName</button>";
+        echo "<div class='siteItem'>";
+        echo "<button type='button' onclick=\"window.location.href='view_site.php?id=$siteId'\">" . $icon . "<img src='$url/favicon.ico' style='width: 20px; height: 20px;'> $siteName</button>";
+        echo "</div>";
     }
     echo "</div>";
 } else {
@@ -144,6 +150,17 @@ if ($result->num_rows > 0) {
 }
 ?>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleViewButton = document.getElementById('toggleViewButton');
+        const siteContainer = document.getElementById('siteContainer');
+
+        toggleViewButton.addEventListener('click', function() {
+            siteContainer.classList.toggle('grid-view');
+        });
+    });
+</script>
 
 <script>
 // Script to open and close sidebar
@@ -164,6 +181,26 @@ function onClick(element) {
   var captionText = document.getElementById("caption");
   captionText.innerHTML = element.alt;
 }
+</script>
+
+<script>
+    function toggleView() {
+        var imageView = document.getElementById("toggleImageView");
+        var currentSrc = imageView.getAttribute("src");
+        
+        // Define the paths for the images
+        var rowIconPath = "Images/row_icon.png";
+        var gridIconPath = "Images/grid_icon.png";
+
+        // Toggle between the images
+        if (currentSrc === rowIconPath) {
+            imageView.setAttribute("src", gridIconPath);
+            imageView.setAttribute("alt", "Grid View");
+        } else {
+            imageView.setAttribute("src", rowIconPath);
+            imageView.setAttribute("alt", "Row View");
+        }
+    }
 </script>
 
 </body>
