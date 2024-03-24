@@ -1,3 +1,14 @@
+<?php
+include 'session.php';
+
+// Check if the user is logged in
+if(!isset($_SESSION['UserID'])) {
+    header("Location: login.html");
+    exit();
+}
+$Admin=isAdmin();
+$UserID = getUserID();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

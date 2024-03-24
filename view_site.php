@@ -1,3 +1,14 @@
+<?php
+include 'session.php';
+
+// Check if the user is logged in
+if(!isset($_SESSION['UserID'])) {
+    header("Location: login.html");
+    exit();
+}
+$Admin=isAdmin();
+$UserID = getUserID();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +88,17 @@ if ($result->num_rows == 1) {
   // Take the difference between the current date and last updated timestamp, and divide by the number of seconds in a day
   $daysSinceUpdate = floor(($today - $lastUpdated) / (60 * 60 * 24));
 
+$username = "";
+$result2 = $conn->query("SELECT Username from user where UserID = ".htmlspecialchars($row["VIewerID"]).";");
+if ($result2) {
+    while ($row2 = $result2->fetch_assoc()) {
+        $username = $row['Username'];
+    }
+    $result2->free();
+} else {
+    echo "Error: " . $mysqli->error;
+}
+
 // Display site information
 echo "<div class='centered-text'>";
 echo "<div class='site-info-container'>";
@@ -85,6 +107,7 @@ echo "<div class='site-info'>";
 echo "<p><strong>Username:</strong> " . htmlspecialchars($row["Username"]) . "</p>";
 echo "<p><strong>Password:</strong> <span id='password'>" . str_repeat('*', strlen($row["Password"])) . "</span> <button onclick='togglePasswordVisibility()' class='btn btn-sm'><img src='Images/show_icon.png' alt='Show' id='showIcon' style='width: 20px; height: 20px;'></button></p>"; // Mask password for security
 echo "<p><strong>Last Updated:</strong> " . htmlspecialchars($row["LastUpdated"]) . "</p>";
+echo "<p><strong>Shared with User:</strong> " . $username . "</p>";
 echo "<p><strong>Note:</strong> " . htmlspecialchars($row["Note"]) . "</p>";
 echo "</div>";
 echo "</div>";
@@ -101,7 +124,9 @@ echo "</div>";
   echo "<button type='button' onclick='copyUsername(\"" . htmlspecialchars($row["Username"]) . "\")'>Copy Username</button>";
   echo "<button type='button' onclick='copyPassword(\"" . htmlspecialchars($row["Password"]) . "\")'>Copy Password</button>";
   echo "<button type='button' onclick='evalPasswordStrength(\"" . htmlspecialchars($row["Password"]) . "\")'>Password Strength</button>";
+  if ($UserID == $row["UserID"]){
   echo "<a href='edit_site.php?id=" . $row["MainID"] . "'><button type='button'>Edit</button></a>";
+  }
   echo "<a href='" . htmlspecialchars($row["URL"]) . "' target='_blank'><button type='button'>Visit Site</button></a>";
   echo "</div>";
 } else {

@@ -1,3 +1,14 @@
+<?php
+include 'session.php';
+
+// Check if the user is logged in
+if(!isset($_SESSION['UserID'])) {
+    header("Location: login.html");
+    exit();
+}
+$Admin=isAdmin();
+$UserID = getUserID();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,10 +90,11 @@
             // Handle update logic (as before)
             $newUsername = htmlspecialchars($_POST['username']);
             $newPassword = htmlspecialchars($_POST['password']);
+			$newVIewerID = htmlspecialchars($_POST['VIewerID']);
             $newNote = htmlspecialchars($_POST['note']);
             $currentTime = date("Y-m-d H:i:s");
 
-            $sql_update = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
+            $sql_update = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', VIewerID = '$newVIewerID', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
             $result_update = $conn->query($sql_update);
 
             // Check if update was successful
@@ -117,6 +129,11 @@
         echo "<input type='text' class='form-control' id='password' name='password' value='" . htmlspecialchars($row["Password"]) . "'>";
         echo "<span id='strength-message' class='text-danger' style='margin-left: 10px;'></span>"; // password strength text here
         echo "</div>";  
+		
+		echo "<div class='form-group'>";
+        echo "<label for='VIewerID'>Share with:</label>";
+        echo "<input type='text' class='form-control' id='VIewerID' name='VIewerID' value='" . $row["VIewerID"] . "'>";
+        echo "</div>";
         
         echo "<div class='form-group'>";
         echo "<label for='note'>Note:</label>";

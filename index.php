@@ -1,5 +1,15 @@
+<?php
+include 'session.php';
+
+// Check if the user is logged in
+if(!isset($_SESSION['UserID'])) {
+    header("Location: login.html");
+    exit();
+}
+$Admin=isAdmin();
+$UserID = getUserID();
+?>
 <!DOCTYPE html>
-<meta http-equiv="refresh" content="0; url=http://localhost/strongpass/index.php" />
 <html lang="en">
 <head>
 <title>Strongpass</title>
@@ -47,7 +57,19 @@
     <button onclick="window.location.href='view_pass.php'">View All Passwords</button>
     <button onclick="downloadCSV()">Download CSV File</button>
     <button onclick="uploadCSV()">Upload CSV File</button>
-  </div>
+ 
+  <form action="logout.php" method="post">
+    <?php
+
+    if ($Admin) {
+        echo '<input type="submit" value="'.$UserID.' Admin Logout">';
+    } else {
+        echo '<input type="submit" value="'.$UserID.' User Logout">';
+    }
+    ?>
+	</form>
+	<form action="logout.php" method="post">
+</div>
 <script>
       function downloadCSV() {
           window.location.href = 'download.php';

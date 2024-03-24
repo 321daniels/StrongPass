@@ -1,3 +1,14 @@
+<?php
+include 'session.php';
+
+// Check if the user is logged in
+if(!isset($_SESSION['UserID'])) {
+    header("Location: login.html");
+    exit();
+}
+$Admin=isAdmin();
+$UserID = getUserID();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,18 +103,30 @@ $sort = isset($_POST['sort']) ? $_POST['sort'] : 'site_asc';
 $search = isset($_POST['search']) ? $_POST['search'] : '';
 $category = isset($_POST['category']) ? $_POST['category'] : 'all';
 
-$sql = "SELECT * FROM main";
+$sql = "SELECT * FROM main where UserId = ".$UserID;
 
 // Append search condition if present
 if (!empty($search)) {
-    $sql .= " WHERE Site LIKE '%" . $conn->real_escape_string($search) . "%'";
+    $sql .= " and Site LIKE '%" . $conn->real_escape_string($search) . "%'";
 }
 
 // Add category filter
 if ($category !== 'all') {
     if (empty($search)) {
-        $sql .= " WHERE";
-    } else {
+		$sql .= " AND";
+    }
+    $sql .= " `Category` = '" . $conn->real_escape_string($category) . "'";
+}
+
+//Add viewer results
+$sql .= " or ViewerID = ".$UserID;
+
+if (!empty($search)) {
+    $sql .= " and Site LIKE '%" . $conn->real_escape_string($search) . "%'";
+}
+// Add category filter
+if ($category !== 'all') {
+    if (empty($search)) {
         $sql .= " AND";
     }
     $sql .= " `Category` = '" . $conn->real_escape_string($category) . "'";
