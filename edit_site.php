@@ -94,15 +94,28 @@ $UserID = getUserID();
             $newNote = htmlspecialchars($_POST['note']);
             $currentTime = date("Y-m-d H:i:s");
 
-            $sql_update = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', VIewerID = '$newVIewerID', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
-            $result_update = $conn->query($sql_update);
-
-            // Check if update was successful
-            if ($result_update) {
-                echo '<div class="alert2 alert-success" role="alert">Entry updated successfully!</div>';
-            } else {
-                echo '<div class="alert2 alert-danger" role="alert">Error updating password. ' . $conn->error . '</div>';
+            // Grab the password length requirement from the admin database
+            $sql_passLength = "SELECT PassLength from adminset";
+            $result_passLength = $conn->query($sql_passLength);
+            if ($result_passLength->num_rows > 0) {
+                $row_passLength = $result_passLength->fetch_assoc();
+                $minPasswordLength = (int) $row_passLength["PassLength"];
             }
+
+            // Ensure the new password meets length requirements before updating this site entry
+            if (strlen($newPassword) < $minPasswordLength) {
+                echo '<div class="alert alert-danger" role="alert">Error: Password must be at least ' . $minPasswordLength . ' characters long!</div>';
+            } else { // Update the entry if password length meets requirement
+                $sql_update = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', VIewerID = '$newVIewerID', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
+                $result_update = $conn->query($sql_update);
+                // Check if update was successful
+                if ($result_update) {
+                    echo '<div class="alert2 alert-success" role="alert">Entry updated successfully!</div>';
+                } else {
+                    echo '<div class="alert2 alert-danger" role="alert">Error updating password. ' . $conn->error . '</div>';
+            }
+            }
+                    
         }
     }
 

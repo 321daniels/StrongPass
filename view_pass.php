@@ -8,6 +8,9 @@ if(!isset($_SESSION['UserID'])) {
 }
 $Admin=isAdmin();
 $UserID = getUserID();
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,12 +93,26 @@ $username = "root"; // MySQL username
 $password = "test"; // MySQL password
 $database = "strongpass"; // MySQL database name
 
+// Password age and length variables to be populated from database query
+$passAgeDays = "";
+$passLength = "";
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+} else {
+    // Grab the password age and length requirements
+    $sql = "SELECT PassAge, PassLength from adminset";
+    $result = $conn->query($sql);
+
+    if($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $passAgeDays = (int) $row["PassAge"];
+        $passLength = (int) $row["PassLength"];
+    }
 }
 
 // Step 3: Construct and execute SQL query
@@ -151,16 +168,24 @@ if ($result->num_rows > 0) {
     echo "<div id='siteContainer' class='centered-buttons'>";
     while ($row = $result->fetch_assoc()) {
         $siteName = $row["Site"];
-        $siteId = $row["MainID"]; // Assuming "id" column uniquely identifies each entry
+        $siteId = $row["MainID"]; 
         $url = $row["URL"];
+        
+        // Grabs each individual password to determine length. Different than database connection password
+        $passwrd = $row["Password"];
+        $passwordLength = strlen($passwrd);
 
         // Calculate days since update and set icon variable
         $lastUpdated = strtotime($row["LastUpdated"]);
         $today = time();
         $daysSinceUpdate = floor(($today - $lastUpdated) / (60*60*24));
         $icon = "";
-        // TODO: Change the amount of days from 15 to whatever is desirable for password security policy
-        if ($daysSinceUpdate >= 15) {
+
+        // Show alert icon if the age of the password age exceeds the setting enforced by the admin
+        if ($daysSinceUpdate >= $passAgeDays) {
+            $icon = "<img src='./Images/alert_triangle.png'>";
+            // Show alert icon if the length of the password is under the setting enforced by the admin
+        } else if ($passLength > $passwordLength) {
             $icon = "<img src='./Images/alert_triangle.png'>";
         }
         echo "<div class='siteItem'>";

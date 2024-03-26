@@ -58,10 +58,14 @@ $UserID = getUserID();
     <button onclick="downloadCSV()">Download CSV File</button>
     <button onclick="uploadCSV()">Upload CSV File</button>
  
+
   <form action="logout.php" method="post">
     <?php
 
     if ($Admin) {
+      // Admin Settings button will be visible to admin users
+        echo '<button type="button" onclick="window.location.href=\'adminmenu.php\'">Admin Settings</button>';
+      // The user will see an "Admin Logout" button if they are an admin
         echo '<input type="submit" value="'.$UserID.' Admin Logout">';
     } else {
         echo '<input type="submit" value="'.$UserID.' User Logout">';

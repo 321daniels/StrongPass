@@ -72,6 +72,19 @@ if (is_numeric($siteId)) {
   die("Invalid site ID");
 }
 
+
+// Retrieve PassAge from adminset
+$passAgeDays = "";
+$passLength = "";
+$sql_passAge = "SELECT PassAge, PassLength FROM adminset";
+$result_passAge = $conn->query($sql_passAge);
+if ($result_passAge->num_rows > 0) {
+  $row_passAge = $result_passAge->fetch_assoc();
+  $passAgeDays = (int) $row_passAge["PassAge"];
+  $passLength = (int) $row_passAge["PassLength"];
+}
+
+
 // Construct and execute SQL query using prepared statement
 $sql = "SELECT * FROM main WHERE MainID = ?";
 $stmt = $conn->prepare($sql);
@@ -106,6 +119,7 @@ echo "<h1>" . htmlspecialchars($row["Site"]) . "</h1>";
 echo "<div class='site-info'>";
 echo "<p><strong>Username:</strong> " . htmlspecialchars($row["Username"]) . "</p>";
 echo "<p><strong>Password:</strong> <span id='password'>" . str_repeat('*', strlen($row["Password"])) . "</span> <button onclick='togglePasswordVisibility()' class='btn btn-sm'><img src='Images/show_icon.png' alt='Show' id='showIcon' style='width: 20px; height: 20px;'></button></p>"; // Mask password for security
+$savedPasswordLength = strlen($row["Password"]); // Grab length of the current saved password
 echo "<p><strong>Last Updated:</strong> " . htmlspecialchars($row["LastUpdated"]) . "</p>";
 echo "<p><strong>Shared with User:</strong> " . $username . "</p>";
 echo "<p><strong>Note:</strong> " . htmlspecialchars($row["Note"]) . "</p>";
@@ -113,10 +127,12 @@ echo "</div>";
 echo "</div>";
 echo "</div>";
 
-  // If no updates have been made in 15 days, alert the user.
-    // NEEDS CSS FORMATTING
-    if ($daysSinceUpdate >= 15) {
-      echo '<div style="text-align: center;"><div class="update-warning">Warning! Password last updated ' . $daysSinceUpdate . ' days ago.</div></div>';
+    // Alert user if the password age is older than the specified admin requirement
+    if ($daysSinceUpdate >= $passAgeDays) {
+      echo '<div style="text-align: center;"><div class="update-warning"><span style="color:red;"><b>Warning!</span></b> Password age exceeds ' . $daysSinceUpdate . ' days. Passwords should be changed every ' . $passAgeDays . ' days.</div></div>';
+    }
+    if ($savedPasswordLength < $passLength) {
+      echo '<div style="text-align: center;"><div class="update-warning"><span style="color:red;"><b>Warning!</span></b> Password does not meet the length requirement (' . $passLength . ' characters).</div></div>';
     }
 
   // Add buttons section
