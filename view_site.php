@@ -101,11 +101,11 @@ if ($result->num_rows == 1) {
   // Take the difference between the current date and last updated timestamp, and divide by the number of seconds in a day
   $daysSinceUpdate = floor(($today - $lastUpdated) / (60 * 60 * 24));
 
-$username = "";
+$shared = "";
 $result2 = $conn->query("SELECT Username from user where UserID = ".htmlspecialchars($row["VIewerID"]).";");
 if ($result2) {
     while ($row2 = $result2->fetch_assoc()) {
-        $username = $row['Username'];
+        $shared = $row2['Username'];
     }
     $result2->free();
 } else {
@@ -121,7 +121,7 @@ echo "<p><strong>Username:</strong> " . htmlspecialchars($row["Username"]) . "</
 echo "<p><strong>Password:</strong> <span id='password'>" . str_repeat('*', strlen($row["Password"])) . "</span> <button onclick='togglePasswordVisibility()' class='btn btn-sm'><img src='Images/show_icon.png' alt='Show' id='showIcon' style='width: 20px; height: 20px;'></button></p>"; // Mask password for security
 $savedPasswordLength = strlen($row["Password"]); // Grab length of the current saved password
 echo "<p><strong>Last Updated:</strong> " . htmlspecialchars($row["LastUpdated"]) . "</p>";
-echo "<p><strong>Shared with User:</strong> " . $username . "</p>";
+echo "<p><strong>Shared with User:</strong> " . $shared . "</p>";
 echo "<p><strong>Note:</strong> " . htmlspecialchars($row["Note"]) . "</p>";
 echo "</div>";
 echo "</div>";
