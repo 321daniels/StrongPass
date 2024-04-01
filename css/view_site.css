@@ -1,14 +1,61 @@
-body, h1, h2, h3, h4, h5 { font-family: "Poppins", sans-serif; }
-body { font-size: 16px; }
-.w3-half img { margin-bottom: -6px; margin-top: 16px; opacity: 0.8; cursor: pointer; }
-.w3-half img:hover { opacity: 1; }
-.centered-text { text-align: center; }
-.centered-buttons { text-align: center; margin-top: 20px; }
-.centered-buttons button { background-color: #8db8da; color: black; padding: 10px 16px; margin: 8px 4px; border: none; cursor: pointer; width: 200px; border-radius: 4px; font-size: 14px; }
-.centered-buttons button:hover { background-color: #6b9dbb; }
-.site-info-container {margin: 0 auto; /* Center the container horizontally */max-width: 600px; /* Adjust the max-width as needed */}
+/* Font Styles */
+body, h1, h2, h3, h4, h5 {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Body */
+body {
+  font-size: 16px;
+}
+
+/* Image Styling */
+.w3-half img {
+  margin-bottom: -6px;
+  margin-top: 16px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.w3-half img:hover {
+  opacity: 1;
+}
+
+/* Centered Text */
+.centered-text {
+  text-align: center;
+}
+
+/* Centered Buttons */
+.centered-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.centered-buttons button {
+  background-color: #8db8da;
+  color: black;
+  padding: 10px 16px;
+  margin: 8px 4px;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.centered-buttons button:hover {
+  background-color: #6b9dbb;
+}
+
+/* Site Info Container */
+.site-info-container {
+  margin: 0 auto; /* Center the container horizontally */
+  max-width: 600px; /* Adjust the max-width as needed */
+}
+
+/* Media Query */
 @media screen and (max-width: 1000px) {
-    h1 {
+  h1 {
       margin-top: 80px; /* Adjusted margin for smaller screens */
-    }
   }
+}

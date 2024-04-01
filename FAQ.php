@@ -48,70 +48,66 @@ $UserID = getUserID();
     </a>
   </div>
 </nav>
+  
+  <!-- Top menu on small screens -->
+  <header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding">
+    <a href="javascript:void(0)" class="w3-button w3-blue w3-margin-right" onclick="w3_open()">☰</a>
+    <span>Strongpass</span>
+  </header>
+  
+  <!-- Overlay effect when opening sidebar on small screens -->
+  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+  
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-blue w3-margin-right" onclick="w3_open()">☰</a>
-  <span>Strongpass</span>
-</header>
+    <h1>Frequently Asked Questions (FAQ)</h1>
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+    <h3>1. What is StrongPass?</h3>
+    <p>
+      StrongPass is a secure password manager that helps you generate, store,
+      and manage complex passwords for your online accounts.
+    </p>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:340px;margin-right:40px">
-  <div class="container mt-4">
-  <h1>Welcome to StrongPass</h1>
+    <h3>2. How do I create a StrongPass account?</h3>
+    <p>
+      To create a StrongPass account, visit our
+      <a href="signup.html">signup page</a> and follow the signup process.
+    </p>
 
-  <img src=".\Images\locked-icon.png"
-       alt="StrongPass Logo"
-       class="center-icon"/>
+    <h3>3. Is StrongPass free to use?</h3>
+    <p>
+      Yes, StrongPass offers a free version with basic features. However, we
+      also plan on providing a premium subscription with additional
+      functionalities. Check our <a href="pricing.html">pricing page</a> for
+      more details.
+    </p>
 
-  <div class="centered-buttons">
-    <button onclick="window.location.href='view_pass.php'">View All Passwords</button>
-    <button onclick="downloadCSV()">Download CSV File</button>
-    <button onclick="uploadCSV()">Upload CSV File</button>
- 
+    <h3>4. Can I use StrongPass on multiple devices?</h3>
+    <p>
+      Yes, StrongPass is designed to be able to share your passwords across
+      multiple devices. Simply log in to your account to share your passwords
+      within the vault.
+    </p>
 
-  <form action="logout.php" method="post">
-    <?php
-    if ($Admin) {
-      // Admin Settings button will be visible to admin users
-        echo '<button type="button" onclick="window.location.href=\'adminmenu.php\'">Admin Settings</button>';
-    }
-    ?>
-	</form>
-	<form action="logout.php" method="post">
-</div>
-<script>
-      function downloadCSV() {
-          window.location.href = 'download.php';
-      }
-  </script>
-<script>
-      function uploadCSV() {
-          var fileInput = document.createElement('input');
-          fileInput.type = 'file';
-          fileInput.onchange = function() {
-              var file = fileInput.files[0];
-              var formData = new FormData();
-              formData.append("fileToUpload", file);
+    <h3>5. How can I reset my StrongPass password?</h3>
+    <p>
+      If you need to reset your StrongPass password, visit the
+      <a href="reset_password.html">password reset page</a> and follow the
+      instructions.
+    </p>
 
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", "upload.php", true);
-              xhr.onreadystatechange = function () {
-                  if (xhr.readyState == 4 && xhr.status == 200) {
-                      alert(xhr.responseText); // Show response from server
-                  }
-              };
-              xhr.send(formData);
-          };
-          fileInput.click();
-      }
-  </script>
-</div>
+    <h3>6. Is my data secure with StrongPass?</h3>
+    <p>
+      Yes, we prioritize the security of your data. StrongPass uses an
+      advanced encryption technique that protects your passwords and sensitive
+      information.
+    </p>
+  </div>
 
-  <footer>&copy; Copyright 2024</footer>
+  <footer class="mt-5">
+    &copy; Copyright 2024
+  </footer>
 
   <script>
     // Script to open and close sidebar

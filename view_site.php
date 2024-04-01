@@ -3,7 +3,7 @@ include 'session.php';
 
 // Check if the user is logged in
 if(!isset($_SESSION['UserID'])) {
-    header("Location: login.html");
+    header("Location: login_page.html");
     exit();
 }
 $Admin=isAdmin();
@@ -29,9 +29,23 @@ $UserID = getUserID();
     <h3 class="w3-padding-64"><b>StrongPass<br></b></h3>
   </div>
   <div class="w3-bar-block">
-    <a href="#showcase" onclick="window.location.href='index.html'" class="w3-bar-item w3-button w3-hover-white">Home</a>
+    <a href="#showcase" onclick="window.location.href='index.php'" class="w3-bar-item w3-button w3-hover-white">Home</a>
     <a href="#showcase" onclick="window.location.href='view_pass.php'" class="w3-bar-item w3-button w3-hover-white">Password</a>
-    <a href="#showcase" onclick="window.location.href='support.html'" class="w3-bar-item w3-button w3-hover-white">Support</a>
+    <a href="#showcase" onclick="window.location.href='support.php'" class="w3-bar-item w3-button w3-hover-white">Support</a>
+    </br>
+    </br>
+    </br>
+    </br>
+    <!-- New button added -->
+    <a href="logout.php" class="w3-bar-item w3-button w3-hover-white">
+      <?php
+        if ($Admin) {
+          echo $UserID.' Admin Logout';
+        } else {
+          echo $UserID.' User Logout';
+        }
+      ?>
+    </a>
   </div>
 </nav>
 
@@ -101,7 +115,7 @@ if ($result->num_rows == 1) {
   // Take the difference between the current date and last updated timestamp, and divide by the number of seconds in a day
   $daysSinceUpdate = floor(($today - $lastUpdated) / (60 * 60 * 24));
 
-$shared = "";
+  $shared = "";
 $result2 = $conn->query("SELECT Username from user where UserID = ".htmlspecialchars($row["VIewerID"]).";");
 if ($result2) {
     while ($row2 = $result2->fetch_assoc()) {

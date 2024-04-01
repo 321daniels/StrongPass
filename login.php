@@ -3,7 +3,7 @@ include 'session.php';
 
 // Database connection details
 $host = 'localhost';
-$username = 'test';
+$username = 'root';
 $password = 'test';
 $database = 'strongpass';
 

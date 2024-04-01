@@ -3,7 +3,7 @@ include 'session.php';
 
 // Check if the user is logged in
 if(!isset($_SESSION['UserID'])) {
-    header("Location: login.html");
+    header("Location: login_page.html");
     exit();
 }
 $Admin=isAdmin();
@@ -29,9 +29,23 @@ $UserID = getUserID();
     <h3 class="w3-padding-64"><b>StrongPass<br></b></h3>
   </div>
   <div class="w3-bar-block">
-    <a href="#showcase" onclick="window.location.href='index.html'" class="w3-bar-item w3-button w3-hover-white">Home</a>
+    <a href="#showcase" onclick="window.location.href='index.php'" class="w3-bar-item w3-button w3-hover-white">Home</a>
     <a href="#showcase" onclick="window.location.href='view_pass.php'" class="w3-bar-item w3-button w3-hover-white">Password</a>
-    <a href="#showcase" onclick="window.location.href='support.html'" class="w3-bar-item w3-button w3-hover-white">Support</a>
+    <a href="#showcase" onclick="window.location.href='support.php'" class="w3-bar-item w3-button w3-hover-white">Support</a>
+    </br>
+    </br>
+    </br>
+    </br>
+    <!-- New button added -->
+    <a href="logout.php" class="w3-bar-item w3-button w3-hover-white">
+      <?php
+        if ($Admin) {
+          echo $UserID.' Admin Logout';
+        } else {
+          echo $UserID.' User Logout';
+        }
+      ?>
+    </a>
   </div>
 </nav>
 
@@ -46,7 +60,7 @@ $UserID = getUserID();
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
-  <div class="container mt-4">
+<div class="container mt-4" style="text-align: center;">
   <h1>Edit Site Information</h1>
   <?php
     // Establish connection
@@ -131,30 +145,31 @@ $UserID = getUserID();
         echo "<div class='form-group'>";
         echo "<h2>" . htmlspecialchars($row["Site"]) . "</h2>";
         echo "</div>";
-
+        
         echo "<div class='form-group'>";
         echo "<label for='username'>Username:</label>";
         echo "<input type='text' class='form-control' id='username' name='username' value='" . $row["Username"] . "'>";
         echo "</div>";
-
+        
         echo "<div class='form-group'>";
         echo "<label for='password'>Password:</label>";
         echo "<input type='text' class='form-control' id='password' name='password' value='" . htmlspecialchars($row["Password"]) . "'>";
         echo "<span id='strength-message' class='text-danger' style='margin-left: 10px;'></span>"; // password strength text here
         echo "</div>";  
-		
-		echo "<div class='form-group'>";
+        
+        echo "<div class='form-group'>";
         echo "<label for='VIewerID'>Share with:</label>";
         echo "<input type='text' class='form-control' id='VIewerID' name='VIewerID' value='" . $row["VIewerID"] . "'>";
         echo "</div>";
         
         echo "<div class='form-group'>";
-        echo "<label for='note'>Note:</label>";
-        echo "<textarea class='form-control' id='note' name='note' rows='3' style='resize: vertical;'>" . htmlspecialchars($row["Note"]) . "</textarea>";
+        echo "<label for='note'>Note:</label><br>";
+        echo "<textarea class='form-control' id='note' name='note' rows='3' style='resize: vertical; width: 81%;'>" . htmlspecialchars($row["Note"]) . "</textarea>";
         echo "</div>";
-
+        
+        
         echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
-    echo "</form>";
+        echo "</form>";
        
         // Add Delete button here
         echo "<form method='post' style='display:inline;'>";

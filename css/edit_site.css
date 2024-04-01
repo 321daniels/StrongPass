@@ -1,19 +1,17 @@
-body,
-h1 {
+/* Fonts */
+body, h1, h2, h3, h4, h5 {
     font-family: "Poppins", sans-serif;
+}
+
+h1 {
     font-size: 48px;
 }
-h2{
-    font-family: "Poppins", sans-serif;
+
+h2 {
     font-size: 38px;
 }
 
-h3,
-h4,
-h5 {
-    font-family: "Poppins", sans-serif;
-}
-
+/* Body */
 body {
     font-size: 16px;
 }
@@ -26,7 +24,7 @@ body {
     text-align: center;
 }
 
-/* Style the buttons */
+/* Buttons */
 .btn {
     background-color: #8db8da;
     color: black;
@@ -43,7 +41,7 @@ body {
     background-color: #6b9dbb;
 }
 
-/* Style the buttons inside centered-buttons2 */
+/* Centered Buttons */
 .centered-buttons2 .btn {
     background-color: #8db8da;
     color: black;
@@ -60,54 +58,45 @@ body {
     background-color: #6b9dbb;
 }
 
-/* Style the alert boxes */
-.alert {
+/* Alert Boxes */
+.alert, .alert2 {
     padding: 20px;
-    background-color: #f44336;
-    color: white;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    width: 70%;
-    margin: auto;
-}
-.alert2 {
-    padding: 20px;
-    background-color: lightgreen;
-    color: white;
     border-radius: 4px;
     margin-bottom: 15px;
     width: 70%;
     margin: auto;
 }
 
-/* Center the form inputs */
+.alert {
+    background-color: #f44336;
+    color: white;
+}
+
+.alert2 {
+    background-color: lightgreen;
+    color: white;
+}
+
+/* Form Inputs */
 .form-group {
     text-align: left;
     width: 70%;
     margin: auto;
 }
 
-/* Adjust margin for the top button */
-.container:first-child {
-    margin-top: 100px;
-}
-
-/* Center the password generator form */
+/* Password Generator Form */
 #passwordGeneratorForm {
     text-align: center;
     width: 70%;
     margin: auto;
 }
 
-/* Center the password strength message */
+/* Password Strength Message */
 #strength-message {
     text-align: center;
     margin-top: 10px;
 }
-/* Center the buttons inside password generator form */
-#passwordGeneratorForm .btn {
-    margin-top: 10px;
-}
+
 .strength-message {
     margin-left: 10px;
 }
@@ -124,6 +113,7 @@ body {
     color: green;
 }
 
+/* Input Container */
 .input-container {
     display: flex;
     align-items: center; /* Vertically center contents */
@@ -132,4 +122,9 @@ body {
 .input-container input[type='password'] {
     flex: 1; /* Grow to fill available space */
     margin-right: 5px; /* Adjust margin between input field and button */
+}
+
+/* Adjust margin for the top button */
+.container:first-child {
+    margin-top: 100px;
 }

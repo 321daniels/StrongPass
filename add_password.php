@@ -3,7 +3,7 @@ include 'session.php';
 
 // Check if the user is logged in
 if(!isset($_SESSION['UserID'])) {
-    header("Location: login.html");
+    header("Location: login_page.html");
     exit();
 }
 $Admin=isAdmin();
@@ -29,9 +29,23 @@ $UserID = getUserID();
     <h3 class="w3-padding-64"><b>StrongPass<br></b></h3>
   </div>
   <div class="w3-bar-block">
-    <a href="#showcase" onclick="window.location.href='index.html'" class="w3-bar-item w3-button w3-hover-white">Home</a>
+    <a href="#showcase" onclick="window.location.href='index.php'" class="w3-bar-item w3-button w3-hover-white">Home</a>
     <a href="#showcase" onclick="window.location.href='view_pass.php'" class="w3-bar-item w3-button w3-hover-white">Password</a>
-    <a href="#showcase" onclick="window.location.href='support.html'" class="w3-bar-item w3-button w3-hover-white">Support</a>
+    <a href="#showcase" onclick="window.location.href='support.php'" class="w3-bar-item w3-button w3-hover-white">Support</a>
+    </br>
+    </br>
+    </br>
+    </br>
+    <!-- New button added -->
+    <a href="logout.php" class="w3-bar-item w3-button w3-hover-white">
+      <?php
+        if ($Admin) {
+          echo $UserID.' Admin Logout';
+        } else {
+          echo $UserID.' User Logout';
+        }
+      ?>
+    </a>
   </div>
 </nav>
 
@@ -90,32 +104,33 @@ $UserID = getUserID();
         ?>
         <!-- User form -->
         <div class="container">
-            <form id="add-password-form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <div class="form-group">
-                    <label for="siteName">Site Name:</label>
-                    <input type="text" name="siteName" id="siteName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" id="username" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" class="form-control" required>
-                <!-- password strength text here -->
-                 <span id='strength-message'></span>  
-                </div>
-                <div class="form-group">
-                    <label for="note">Note (optional):</label>
-                    <textarea name="note" id="note" class="form-control" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="url">URL (optional):</label>
-                    <input type="url" name="url" id="url" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-primary">Add Password</button>
-            </form>
+    <form id="add-password-form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <div class="form-group">
+            <label for="siteName">Site Name:</label>
+            <input type="text" name="siteName" id="siteName" class="form-control" required>
         </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" class="form-control" required>
+            <!-- password strength text here -->
+            <span id='strength-message'></span>  
+        </div>
+        <div class="form-group">
+            <label for="url">URL (optional):</label>
+            <input type="url" name="url" id="url" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="note">Note (optional):</label>
+          <textarea name="note" id="note" class="form-control note-field" rows="3" style="width: 84%;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Password</button>
+    </form>
+</div>
+
     </main>
 
 <!-- Password generator form, hidden until user clicks Show Password Generator button -->

@@ -48,70 +48,42 @@ $UserID = getUserID();
     </a>
   </div>
 </nav>
+  
+  <!-- Top menu on small screens -->
+  <header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding">
+    <a href="javascript:void(0)" class="w3-button w3-blue w3-margin-right" onclick="w3_open()">☰</a>
+    <span>Strongpass</span>
+  </header>
+  
+  <!-- Overlay effect when opening sidebar on small screens -->
+  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+  
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-blue w3-margin-right" onclick="w3_open()">☰</a>
-  <span>Strongpass</span>
-</header>
+    <div class="container mt-4">
+    <h1>Support</h1>
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+    <p>
+      Welcome to StrongPass support! If you have any questions, issues, or
+      need assistance with our password manager, please feel free to reach out
+      to our support team.
+    </p>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:340px;margin-right:40px">
-  <div class="container mt-4">
-  <h1>Welcome to StrongPass</h1>
+    <h2 class="text-center">Contact Information</h2>
+    <p class="text-center"><strong>Email:</strong> support@strongpass.com</p>
+    <p class="text-center"><strong>Phone:</strong> +1 (800) STRONG</p>
 
-  <img src=".\Images\locked-icon.png"
-       alt="StrongPass Logo"
-       class="center-icon"/>
+    <h2 class="text-center">Frequently Asked Questions (FAQs)</h2>
+    <p class="text-center">
+      Check out our <a href="faq.php">FAQ page</a> to find answers to common
+      questions and troubleshooting tips.
+    </p>
+  </div>
 
-  <div class="centered-buttons">
-    <button onclick="window.location.href='view_pass.php'">View All Passwords</button>
-    <button onclick="downloadCSV()">Download CSV File</button>
-    <button onclick="uploadCSV()">Upload CSV File</button>
- 
-
-  <form action="logout.php" method="post">
-    <?php
-    if ($Admin) {
-      // Admin Settings button will be visible to admin users
-        echo '<button type="button" onclick="window.location.href=\'adminmenu.php\'">Admin Settings</button>';
-    }
-    ?>
-	</form>
-	<form action="logout.php" method="post">
-</div>
-<script>
-      function downloadCSV() {
-          window.location.href = 'download.php';
-      }
-  </script>
-<script>
-      function uploadCSV() {
-          var fileInput = document.createElement('input');
-          fileInput.type = 'file';
-          fileInput.onchange = function() {
-              var file = fileInput.files[0];
-              var formData = new FormData();
-              formData.append("fileToUpload", file);
-
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", "upload.php", true);
-              xhr.onreadystatechange = function () {
-                  if (xhr.readyState == 4 && xhr.status == 200) {
-                      alert(xhr.responseText); // Show response from server
-                  }
-              };
-              xhr.send(formData);
-          };
-          fileInput.click();
-      }
-  </script>
-</div>
-
-  <footer>&copy; Copyright 2024</footer>
+  <footer class="mt-5">
+    &copy; Copyright 2024
+  </footer>
 
   <script>
     // Script to open and close sidebar
