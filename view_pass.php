@@ -90,7 +90,7 @@ $UserID = getUserID();
         </form>
         <!-- Toggle View Button -->
         <button type="button" id="toggleViewButton" style="padding: 5px;" onclick="toggleView()">
-          <img src="Images/grid_icon.png" alt="Grid View" id="toggleImageView" style="width: 20px; height: 20px;">
+          <img src="Images/row_icon.png" alt="Grid View" id="toggleImageView" style="width: 20px; height: 20px;">
         </button>
       </div>
     <div id="searchResults" class="row-view"><!-- Assuming initial view is row view --></div>
@@ -215,7 +215,12 @@ if ($result->num_rows > 0) {
         const toggleViewButton = document.getElementById('toggleViewButton');
         const siteContainer = document.getElementById('siteContainer');
 
+        // Initially set the view to grid
+        siteContainer.classList.add('grid-view');
+
         toggleViewButton.addEventListener('click', function() {
+            // Toggle between row and grid view
+            siteContainer.classList.toggle('row-view');
             siteContainer.classList.toggle('grid-view');
         });
     });
