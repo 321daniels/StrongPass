@@ -99,7 +99,12 @@ INSERT INTO `main` (`MainID`, `UserID`, `Site`, `Username`, `Password`, `LastUpd
 (28, 1, 'Walmart', 'walmartshopper', 'W@lm@rtSh0pp3r', '2024-03-06 13:50:00', 'Retail corporation for shopping', 'https://www.walmart.com', 3, 'Social', 0),
 (29, 1, 'Best Buy', 'bestbuyshopper', 'B3stBuyDeals', '2024-04-02 06:17:27', 'Consumer electronics retailer', 'https://www.bestbuy.com', 3, 'Social', 0),
 (30, 1, 'IMDb', 'moviebuff', 'IMD8M0vieL0ver', '2024-03-06 16:30:00', 'Internet Movie Database', 'https://www.imdb.com/', 3, 'Entertainment', 0),
-(31, 1, 'Yelp', 'yelpreviewer', 'Y3lpReview3r', '2024-03-06 16:40:00', 'Find and review local businesses', 'https://www.yelp.com/', 3, 'Social', 0);
+(31, 1, 'Yelp', 'yelpreviewer', 'Y3lpReview3r', '2024-03-06 16:40:00', 'Find and review local businesses', 'https://www.yelp.com/', 3, 'Social', 0),
+(32, 1, 'Etsy', 'etsyshopper', 'Et$ySh0p', '2024-03-26 13:30:00', 'Online marketplace for handmade and vintage items', 'https://www.etsy.com', 3, 'Social', 0),
+(33, 1, 'YouTube', 'ytviewer', 'Y0utub3L0ver', '2024-03-24 01:27:23', 'Video sharing platform', 'https://www.youtube.com', 2, 'Entertainment', 0),
+(34, 1, 'Tumblr', 'tumblruser', 'Tumbl3Rul3s', '2024-03-26 10:45:00', 'Blogging platform', 'https://www.tumblr.com', 3, 'Social', 0),
+(35, 1, 'TikTok', 'tiktoklover', 'T1kT0kF@n', '2024-03-24 01:27:23', 'Short-form video platform', 'https://www.tiktok.com', 2, 'Entertainment', 0),
+(36, 1, 'Apple', 'applefan', '4ppl3L0v3r', '2024-03-24 01:27:23', 'Technology company', 'https://www.apple.com', 2, 'Technology', 0);
 
 -- --------------------------------------------------------
 
