@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `main` (
 INSERT INTO `main` (`MainID`, `UserID`, `Site`, `Username`, `Password`, `LastUpdated`, `Note`, `URL`, `VIewerID`, `Category`, `ShareLock`, `ShareSeen`) VALUES
 (1, 2, 'Reddit', 'redditor', 'R3dd1tUpv0t3', '2024-03-24 01:26:19', 'Community forums', 'https://www.reddit.com', 1, 'Social', 0, 1),
 (2, 1, 'Stack Overflow', 'stackoverflower', 'S0v3rfl0wRocks', '2024-03-24 01:27:23', 'Developer Q&A', 'https://stackoverflow.com', 2, 'Education', 0, 1),
-(3, 1, 'Medium', 'blogreader', 'M3d1umBl0gs', '2024-03-24 01:27:23', 'Content platform', 'https://www.medium.com', 2, 'Social', 0, 1),
+(3, 1, 'Apple', 'applefan', '4ppl3L0v3r', '2024-03-24 01:27:23', 'Technology company', 'https://www.apple.com', 2, 'Technology', 0, 1),
 (4, 1, 'Twitter', 'tweetmaster', 'Tw1tt3rPass', '2024-03-24 01:27:23', 'Microblogging platform', 'https://www.twitter.com', 2, 'Social', 0, 1),
 (5, 1, 'Netflix', 'bingewatcher', 'N3tflix&Chill', '2024-03-24 01:27:23', 'Streaming service', 'https://www.netflix.com', 2, 'Streaming', 0, 1),
 (6, 1, 'LinkedIn', 'professional', 'L1nk3d1nC0nn3ct', '2024-03-24 01:27:23', 'Professional network', 'https://www.linkedin.com', 2, 'Social', 0, 1),
@@ -104,8 +104,7 @@ INSERT INTO `main` (`MainID`, `UserID`, `Site`, `Username`, `Password`, `LastUpd
 (32, 1, 'Etsy', 'etsyshopper', 'Et$ySh0p', '2024-03-26 13:30:00', 'Online marketplace for handmade and vintage items', 'https://www.etsy.com', 3, 'Social', 0, 0),
 (33, 1, 'YouTube', 'ytviewer', 'Y0utub3L0ver', '2024-03-24 01:27:23', 'Video sharing platform', 'https://www.youtube.com', 2, 'Entertainment', 0, 1),
 (34, 1, 'Tumblr', 'tumblruser', 'Tumbl3Rul3s', '2024-03-26 10:45:00', 'Blogging platform', 'https://www.tumblr.com', 3, 'Social', 0, 0),
-(35, 1, 'TikTok', 'tiktoklover', 'T1kT0kF@n', '2024-03-24 01:27:23', 'Short-form video platform', 'https://www.tiktok.com', 2, 'Entertainment', 0, 1),
-(36, 1, 'Apple', 'applefan', '4ppl3L0v3r', '2024-03-24 01:27:23', 'Technology company', 'https://www.apple.com', 2, 'Technology', 0, 1);
+(35, 1, 'TikTok', 'tiktoklover', 'T1kT0kF@n', '2024-03-24 01:27:23', 'Short-form video platform', 'https://www.tiktok.com', 2, 'Entertainment', 0, 1);
 
 -- --------------------------------------------------------
 
