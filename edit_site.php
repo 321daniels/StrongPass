@@ -105,6 +105,8 @@ $UserID = getUserID();
             $newUsername = htmlspecialchars($_POST['username']);
             $newPassword = htmlspecialchars($_POST['password']);
 			$newVIewerID = htmlspecialchars($_POST['VIewerID']);
+			//$newShareLock = htmlspecialchars($_POST['ShareLock']);
+			$newShareLock = isset($_POST['ShareLock']) ? htmlspecialchars($_POST['ShareLock']) : 0;
             $newNote = htmlspecialchars($_POST['note']);
             $currentTime = date("Y-m-d H:i:s");
 
@@ -120,7 +122,7 @@ $UserID = getUserID();
             if (strlen($newPassword) < $minPasswordLength) {
                 echo '<div class="alert alert-danger" role="alert">Error: Password must be at least ' . $minPasswordLength . ' characters long!</div>';
             } else { // Update the entry if password length meets requirement
-                $sql_update = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', VIewerID = '$newVIewerID', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
+                $sql_update = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', VIewerID = '$newVIewerID', ShareLock = '$newShareLock', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
                 $result_update = $conn->query($sql_update);
                 // Check if update was successful
                 if ($result_update) {
@@ -162,6 +164,11 @@ $UserID = getUserID();
         echo "<input type='text' class='form-control' id='VIewerID' name='VIewerID' value='" . $row["VIewerID"] . "'>";
         echo "</div>";
         
+		echo "<div class='form-group'>";
+		echo "<label for='ShareLock'>Block Sharing:  </label>";
+		echo "<input type='checkbox' class='form-control' id='ShareLock' name='ShareLock' value='1'" . ($row["ShareLock"] ? " checked" : "") . ">";
+		echo "</div>";
+		
         echo "<div class='form-group'>";
         echo "<label for='note'>Note:</label><br>";
         echo "<textarea class='form-control' id='note' name='note' rows='3' style='resize: vertical; width: 81%;'>" . htmlspecialchars($row["Note"]) . "</textarea>";

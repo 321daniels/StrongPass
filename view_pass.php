@@ -147,7 +147,7 @@ if ($category !== 'all') {
 }
 
 //Add viewer results
-$sql .= " or ViewerID = ".$UserID;
+$sql .= " or ViewerID = ".$UserID." and ShareLock = '0'";
 
 if (!empty($search)) {
     $sql .= " and Site LIKE '%" . $conn->real_escape_string($search) . "%'";
