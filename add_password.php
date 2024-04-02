@@ -90,7 +90,7 @@ $UserID = getUserID();
                 }
 
                 // Create the new database entry
-                $sql = "INSERT INTO main (Site, Username, Password, LastUpdated, Note, URL) VALUES ('$siteName', '$addUsername', '$addPassword', '$currentTime', '$note', '$url')";
+                $sql = "INSERT INTO main (UserID, Site, Username, Password, LastUpdated, Note, URL, ShareLock, ShareSeen) VALUES ('$UserID', '$siteName', '$addUsername', '$addPassword', '$currentTime', '$note', '$url', 0, 0)";
 
                 if ($conn->query($sql) === TRUE) {
                     echo '<div class="alert2 alert-success" role="alert">Password added successfully!</div>';
@@ -195,7 +195,6 @@ $UserID = getUserID();
             strengthCheck(newGeneratedPassword);
             }
     
-        // Function to actively check the strength of a password as it is typed
         // Function to actively check the strength of a password as it is typed
         function strengthCheck() {
             const password = passwordInput.value;

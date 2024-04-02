@@ -96,6 +96,64 @@ $UserID = getUserID();
     <div id="searchResults" class="row-view"><!-- Assuming initial view is row view --></div>
 </div>
 
+<!-- start of ShareSeen logic -->
+<?php
+    // Step 1: Establish a connection to MySQL database
+    $servername = "localhost"; // Change this if your MySQL server is hosted elsewhere
+    $username = "root"; // MySQL username
+    $password = "test"; // MySQL password
+    $database = "strongpass"; // MySQL database name
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+    
+    function check_new_shared_passwords($userID) {
+        global $conn;
+        // If the user's ID matches the ViewerID, and has never received a shared password alert, show alert
+        $sql = "SELECT * FROM main WHERE VIewerID = ? AND ShareSeen = 0";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if($result->num_rows > 0) {
+            echo "Found " . $result->num_rows . " unseen entries. <br>";
+
+            while ($row = $result->fetch_assoc()) {
+                $sites[] = $row['Site'];
+            }
+            
+                // ShareSeen set to 1 after the password has been seen by the user
+                
+                $updateSql = "UPDATE main SET ShareSeen = 1 WHERE VIewerID = ?";
+                $updateStmt = $conn->prepare($updateSql);
+                $updateStmt->bind_param("i", $userID);
+                $updateStmt->execute();
+                $updateStmt->close();
+
+                // Alert displayed to user
+                foreach ($sites as $site) {
+                    // STYLING IS NOT IDEAL -- Can we fix? I wanted it like the "Password added successfully" message on add_password.php, but it wasn't working
+                    echo "<div class='alert' role='alert'>A new password has been shared for $site.</div>";
+                }
+        } 
+        // Uncomment for debugging purposes. Identifies the user logged in
+        // else {
+        //     echo "No unseen entries found for UserID " . $userID . "<br>";
+        // }
+        $stmt->close();
+    }
+
+    check_new_shared_passwords($UserID);
+
+    $conn->close();
+?>
+
     <!-- PHP Password Display -->
     <?php
 // Step 1: Establish a connection to MySQL database
