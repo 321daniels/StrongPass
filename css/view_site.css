@@ -59,3 +59,21 @@ body {
       margin-top: 80px; /* Adjusted margin for smaller screens */
   }
 }
+
+.alert, .alert2 {
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  width: 70%;
+  margin: auto;
+}
+
+.alert {
+  background-color: #f44336;
+  color: black;
+}
+
+.alert2 {
+  background-color: lightgreen;
+  color: black;
+}

@@ -69,12 +69,12 @@ body {
 
 .alert {
     background-color: #f44336;
-    color: white;
+    color: black;
 }
 
 .alert2 {
     background-color: lightgreen;
-    color: white;
+    color: black;
 }
 
 /* Form Inputs */

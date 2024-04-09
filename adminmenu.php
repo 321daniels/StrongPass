@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Strongpass - Login</title>
+<title>Strongpass</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-<link rel="stylesheet" href="./css/style.css"/>
+<link rel="stylesheet" href="./css/edit_site.css"/>
 </head>
 <body>
 
@@ -92,8 +92,9 @@
         mysqli_stmt_bind_param($stmt, "ii", $reminderDays, $minLength);
 
         if (mysqli_stmt_execute($stmt)) {
-          echo "Settings saved successfully!";
+          echo '<div class="alert2 alert-success" role="alert">Settings saved successfully!</div>';
         } else {
+          echo '<div class="alert alert-success" role="alert">Error updating settings!</div>';
           echo "Error updating settings: " . mysqli_error($conn);
         }
         mysqli_stmt_close($stmt);
@@ -101,21 +102,27 @@
 
       mysqli_close($conn);
     ?>
-    <h1>Admin Settings</h1>
-    <form method="post">
-      <label for="reminder_days">Password Age Reminder (in Days):</label>
-      <input type="number" id="reminder_days" name="reminder_days" min="1" value="<?php echo $reminderDays; ?>">
-      <br><br>
-      <label for="min_length">Minimum Password Length:</label>
-      <input type="number" id="min_length" name="min_length" min="1" value="<?php echo $minLength; ?>">
-      <br><br>
-      <button type="submit">Save Settings</button>
+        <h1>Admin Settings</h1>
+        <br></br>
+        <h3>Password Alert Settings</h3>
+        <form method="post">
+          <label for="reminder_days">Password Age Reminder (in Days):</label>
+          <input type="number" id="reminder_days" name="reminder_days" min="1" value="<?php echo $reminderDays; ?>">
+          <br></br>
+          <label for="min_length">Minimum Password Length:</label>
+          <input type="number" id="min_length" name="min_length" min="1" value="<?php echo $minLength; ?>">
+            <div class="centered-buttons">
+            <button type="submit" class="btn btn-primary">Save Settings</button>
+            </div>
+        </form>
+      <br>
+ 
+<!-- Form for managing users -->
+<div class="centered-buttons">
+    <h3>User Managment</h3>
+      <button type="button" onclick="window.location.href='manage_user.php'" class="btn btn-primary">Manage Users</button>
     </form>
-    <!-- End Admin Settings -->
-  </div>
 </div>
-
-<footer>&copy; Copyright 2024</footer>
 
 <script>
   // Script to open and close sidebar
