@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 02, 2024 at 09:21 PM
+-- Generation Time: Apr 09, 2024 at 11:20 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -139,6 +139,7 @@ INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `Username`, `Admin`) VALU
 (10, 'Burt', 'Gladys', 'burtgladys', 0);
 
 -- --------------------------------------------------------
+
 --
 -- Table structure for table `usercolor`
 --
@@ -168,16 +169,17 @@ INSERT INTO `usercolor` (`UserID`, `R`, `G`, `B`) VALUES
 (115, 0, 0, 0);
 
 -- --------------------------------------------------------
+
 --
 -- Table structure for table `viewer`
 --
 
 DROP TABLE IF EXISTS `viewer`;
 CREATE TABLE IF NOT EXISTS `viewer` (
-  `ViewerID` int NOT NULL AUTO_INCREMENT,
+  `ViewerID` int NOT NULL,
   `UserID` int NOT NULL,
   `MainID` int NOT NULL,
-  PRIMARY KEY (`ViewerID`)
+  PRIMARY KEY (`MainID`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -185,18 +187,18 @@ CREATE TABLE IF NOT EXISTS `viewer` (
 --
 
 INSERT INTO `viewer` (`ViewerID`, `UserID`, `MainID`) VALUES
-(101, 101, 30),
-(102, 101, 32),
-(103, 101, 31),
-(104, 101, 29),
-(105, 101, 28),
-(106, 101, 27),
-(107, 101, 26),
-(108, 101, 25),
-(109, 101, 24),
-(110, 101, 23),
-(111, 101, 33),
-(112, 101, 34);
+(2, 1, 30),
+(2, 1, 32),
+(2, 1, 31),
+(2, 1, 29),
+(2, 1, 28),
+(2, 1, 27),
+(2, 1, 26),
+(2, 1, 25),
+(2, 1, 24),
+(3, 1, 23),
+(3, 1, 33),
+(3, 1, 34);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
