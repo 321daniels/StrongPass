@@ -7,7 +7,7 @@ StrongPass is a password management system developed as a part of the CSI 4999 S
 Technologies Used
 Frontend:
 HTML,
-CSS,,
+CSS,
 Bootstrap,
 And JavaScript
 
