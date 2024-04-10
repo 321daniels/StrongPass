@@ -1,4 +1,6 @@
 function generatePassword() {
+  console.log("Generating password...");
+
   // Define character sets for password generation
   const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
   const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -10,6 +12,11 @@ function generatePassword() {
   const includeUppercase = document.getElementById('includeUppercase').checked;
   const includeNumbers = document.getElementById('includeNumbers').checked;
   const includeSymbols = document.getElementById('includeSymbols').checked;
+
+  console.log("Password Length:", passwordLength);
+  console.log("Include Uppercase:", includeUppercase);
+  console.log("Include Numbers:", includeNumbers);
+  console.log("Include Symbols:", includeSymbols);
 
   // Ensure input validation
   if (isNaN(passwordLength) || passwordLength <= 0) {
@@ -25,6 +32,8 @@ function generatePassword() {
 
   allChars = allChars.join('');
 
+  console.log("Combined Character Sets:", allChars);
+
   // Ensure at least one character set is selected
   if (!includeUppercase && !includeNumbers && !includeSymbols) {
     alert('Please select at least one option (Uppercase, Numbers, or Symbols).');
@@ -38,12 +47,8 @@ function generatePassword() {
     generatedPassword += allChars.charAt(randomIndex);
   }
 
+  console.log("Generated Password:", generatedPassword);
+
   // Update the value of the "generatedPassword" input field
   document.getElementById('generatedPassword').value = generatedPassword;
-}
-
-// Optional: If you want to log generated passwords, you can use the following function
-function logGeneratedPassword() {
-  const generatedPassword = document.getElementById('generatedPassword').value;
-  console.log('Generated Password:', generatedPassword);
 }

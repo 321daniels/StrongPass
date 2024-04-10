@@ -1,0 +1,130 @@
+/* Fonts */
+body, h1, h2, h3, h4, h5 {
+    font-family: "Poppins", sans-serif;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 38px;
+}
+
+/* Body */
+body {
+    font-size: 16px;
+}
+
+/* Center all elements */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Buttons */
+.btn {
+    background-color: #8db8da;
+    color: black;
+    padding: 10px 16px;
+    margin: 8px 4px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background-color: #6b9dbb;
+}
+
+/* Centered Buttons */
+.centered-buttons2 .btn {
+    background-color: #8db8da;
+    color: black;
+    padding: 10px 16px;
+    margin: 8px 4px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.centered-buttons2 .btn:hover {
+    background-color: #6b9dbb;
+}
+
+/* Alert Boxes */
+.alert, .alert2 {
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    width: 70%;
+    margin: auto;
+}
+
+.alert {
+    background-color: #f44336;
+    color: black;
+}
+
+.alert2 {
+    background-color: lightgreen;
+    color: black;
+}
+
+/* Form Inputs */
+.form-group {
+    text-align: left;
+    width: 70%;
+    margin: auto;
+}
+
+/* Password Generator Form */
+#passwordGeneratorForm {
+    text-align: center;
+    width: 70%;
+    margin: auto;
+}
+
+/* Password Strength Message */
+#strength-message {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.strength-message {
+    margin-left: 10px;
+}
+
+.strength-message.weak {
+    color: red;
+}
+
+.strength-message.medium {
+    color: orange;
+}
+
+.strength-message.strong {
+    color: green;
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    align-items: center; /* Vertically center contents */
+}
+
+.input-container input[type='password'] {
+    flex: 1; /* Grow to fill available space */
+    margin-right: 5px; /* Adjust margin between input field and button */
+}
+
+/* Adjust margin for the top button */
+.container:first-child {
+    margin-top: 100px;
+}

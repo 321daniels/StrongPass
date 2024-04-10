@@ -1,6 +1,16 @@
 <?php
+include 'session.php';
+
+// Check if the user is logged in
+if(!isset($_SESSION['UserID'])) {
+    header("Location: login_page.html");
+    exit();
+}
+$Admin=isAdmin();
+$UserID = getUserID();
+
 $servername = "localhost";
-$username = "test";
+$username = "root";
 $password = "test";
 $dbname = "strongpass";
 

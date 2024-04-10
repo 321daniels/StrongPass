@@ -1,73 +1,71 @@
+<?php
+include 'session.php';
+
+// Check if the user is logged in
+if(!isset($_SESSION['UserID'])) {
+    header("Location: login_page.html");
+    exit();
+}
+$Admin=isAdmin();
+$UserID = getUserID();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>StrongPass</title>
-    <link rel="stylesheet" href=".\css\style.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-          crossorigin="anonymous"/>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-            crossorigin="anonymous"></script>
-    <script src="./darkmode.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="./generatedPassword.js"></script>
+<title>Strongpass</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href=".\css\edit_site.css"/>
 </head>
-
 <body>
-    <!-- Nav Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="./Index.html">StrongPass</a>
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="view_pass.php">Passwords</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="support.html">Support</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=""></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=""></a>
-                    </li>
-                </ul>
-                <!-- Dark Mode Toggle Button -->
-                <div class="toggle-container">
-                    <button id="toggleOptions">🌘⬌☀️</button>
-                    <div class="options-popout d-none" id="optionsPopout">
-                        <input type="color" id="customColor" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
 
-    <div class="container mt-4">
-    <?php
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-blue w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar">
+  <br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container">
+    <h3 class="w3-padding-64"><b>StrongPass<br></b></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#showcase" onclick="window.location.href='index.php'" class="w3-bar-item w3-button w3-hover-white">Home</a>
+    <a href="#showcase" onclick="window.location.href='view_pass.php'" class="w3-bar-item w3-button w3-hover-white">Password</a>
+    <a href="#showcase" onclick="window.location.href='support.php'" class="w3-bar-item w3-button w3-hover-white">Support</a>
+    </br>
+    </br>
+    </br>
+    </br>
+    <!-- New button added -->
+    <a href="logout.php" class="w3-bar-item w3-button w3-hover-white">
+      <?php
+        if ($Admin) {
+          echo $UserID.' Admin Logout';
+        } else {
+          echo $UserID.' User Logout';
+        }
+      ?>
+    </a>
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-blue w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Strongpass</span>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+<div class="container mt-4" style="text-align: center;">
+  <h1>Edit Site Information</h1>
+  <?php
     // Establish connection
     $servername = "localhost"; // Change this if your MySQL server is hosted elsewhere
-    $username = "test"; // MySQL username
+    $username = "root"; // MySQL username
     $password = "test"; // MySQL password
     $database = "strongpass"; // MySQL database name
 
@@ -106,18 +104,34 @@
             // Handle update logic (as before)
             $newUsername = htmlspecialchars($_POST['username']);
             $newPassword = htmlspecialchars($_POST['password']);
+			$newVIewerID = htmlspecialchars($_POST['VIewerID']);
+			//$newShareLock = htmlspecialchars($_POST['ShareLock']);
+			$newShareLock = isset($_POST['ShareLock']) ? htmlspecialchars($_POST['ShareLock']) : 0;
             $newNote = htmlspecialchars($_POST['note']);
             $currentTime = date("Y-m-d H:i:s");
 
-            $sql_update = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
-            $result_update = $conn->query($sql_update);
-
-            // Check if update was successful
-            if ($result_update) {
-                echo '<div class="alert alert-success" role="alert">Entry updated successfully!</div>';
-            } else {
-                echo '<div class="alert alert-danger" role="alert">Error updating password. ' . $conn->error . '</div>';
+            // Grab the password length requirement from the admin database
+            $sql_passLength = "SELECT PassLength from adminset";
+            $result_passLength = $conn->query($sql_passLength);
+            if ($result_passLength->num_rows > 0) {
+                $row_passLength = $result_passLength->fetch_assoc();
+                $minPasswordLength = (int) $row_passLength["PassLength"];
             }
+
+            // Ensure the new password meets length requirements before updating this site entry
+            if (strlen($newPassword) < $minPasswordLength) {
+                echo '<div class="alert alert-danger" role="alert">Error: Password must be at least ' . $minPasswordLength . ' characters long!</div>';
+            } else { // Update the entry if password length meets requirement
+                $sql_update = "UPDATE main SET Username = '$newUsername', Password = '$newPassword', VIewerID = '$newVIewerID', ShareLock = '$newShareLock', Note = '$newNote', LastUpdated = '$currentTime' WHERE MainID = $siteId";
+                $result_update = $conn->query($sql_update);
+                // Check if update was successful
+                if ($result_update) {
+                    echo '<div class="alert2 alert-success" role="alert">Entry updated successfully!</div>';
+                } else {
+                    echo '<div class="alert2 alert-danger" role="alert">Error updating password. ' . $conn->error . '</div>';
+            }
+            }
+                    
         }
     }
 
@@ -129,24 +143,41 @@
         $row = $result->fetch_assoc();
 
         // Display form to edit site information
-        echo "<h1>Edit Site Information</h1>";
-        echo "<form method='post'>";
+        echo "<form method='post' class='container'>";
+        echo "<div class='form-group'>";
+        echo "<h2>" . htmlspecialchars($row["Site"]) . "</h2>";
+        echo "</div>";
+        
         echo "<div class='form-group'>";
         echo "<label for='username'>Username:</label>";
         echo "<input type='text' class='form-control' id='username' name='username' value='" . $row["Username"] . "'>";
         echo "</div>";
+        
         echo "<div class='form-group'>";
         echo "<label for='password'>Password:</label>";
-        echo "<input type='password' class='form-control' id='password' name='password' value='" . $row["Password"] . "'>";
-        echo "<span id='strength-message'></span>"; // password strength text here
-        echo "</div>";
+        echo "<input type='text' class='form-control' id='password' name='password' value='" . htmlspecialchars($row["Password"]) . "'>";
+        echo "<span id='strength-message' class='text-danger' style='margin-left: 10px;'></span>"; // password strength text here
+        echo "</div>";  
+        
         echo "<div class='form-group'>";
-        echo "<label for='note'>Note:</label>";
-        echo "<textarea class='form-control' id='note' name='note' rows='3'>" . $row["Note"] . "</textarea>";
+        echo "<label for='VIewerID'>Share with:</label>";
+        echo "<input type='text' class='form-control' id='VIewerID' name='VIewerID' value='" . $row["VIewerID"] . "'>";
         echo "</div>";
+        
+		echo "<div class='form-group'>";
+		echo "<label for='ShareLock'>Block Sharing:  </label>";
+		echo "<input type='checkbox' class='form-control' id='ShareLock' name='ShareLock' value='1'" . ($row["ShareLock"] ? " checked" : "") . ">";
+		echo "</div>";
+		
+        echo "<div class='form-group'>";
+        echo "<label for='note'>Note:</label><br>";
+        echo "<textarea class='form-control' id='note' name='note' rows='3' style='resize: vertical; width: 81%;'>" . htmlspecialchars($row["Note"]) . "</textarea>";
+        echo "</div>";
+        
+        
         echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
         echo "</form>";
-        
+       
         // Add Delete button here
         echo "<form method='post' style='display:inline;'>";
         echo "<input type='hidden' name='delete' value='true'>";
@@ -165,7 +196,7 @@
 <div class="container mt-4">
     <button type="button" class="btn btn-primary" id="showPasswordGenerator">Show Password Generator</button>
     <form id="passwordGeneratorForm" style="display: none;">
-        <h2>Password Generator</h2>
+        <h3>Password Generator</h3>
         <div class="mb-3">
           <label for="passwordLength" class="form-label">Password Length:</label>
           <input type="number" class="form-control" id="passwordLength" min="6" max="64" value="12" required>
@@ -190,14 +221,13 @@
         </div>
 
         <div class="mt-3">
-          <button class="centered-buttons2" type="button" onclick="generatePassword()">Generate Password</button>
-          <input type="text" class="form-control" id="generatedPassword" readonly>
-          <div class="container mt-1"></div>
-          <!-- Modified from generatedPassword... needed to change functionality to insert into the input/form -->
-          <button type="button" class="btn btn-primary" id="insertGeneratedPassword">Insert Generated Password</button>
+            <!-- Ensure the onclick event calls the generatePassword() function -->
+            <button class="btn btn-primary" type="button" onclick="generatePassword()">Generate Password</button>
+            <input type="text" class="form-control" id="generatedPassword" readonly>
+        <div class="container mt-1"></div>
+            <!-- Modified from generatedPassword... needed to change functionality to insert into the input/form -->
+            <button type="button" class="btn btn-primary" id="insertGeneratedPassword">Insert Generated Password</button>
         </div>
-    </form>
-</div>
 
     <script>
         
@@ -225,6 +255,7 @@
             }
     
         // Function to actively check the strength of a password as it is typed
+        // Function to actively check the strength of a password as it is typed
         function strengthCheck() {
             const password = passwordInput.value;
 
@@ -232,9 +263,9 @@
 
             // Checks length requirements
             if (password.length >= 12) {
-            score += 2;
+                score += 2;
             } else if (password.length >= 8) {
-            score += 1;
+                score += 1;
             }
 
             // checks character requirements
@@ -246,29 +277,26 @@
 
             // if the password contains uppercase, lowercase, number, and special character
             if (hasUpper && hasLower && hasNums && hasSpecial) {
-            score += 2;
+                score += 2;
             // if the password has at least two of the following: uppercase, lowercase, number, or special character
-            } else if (hasUpper + hasLower + hasNums + hasSpecial >= 2) {
+        } else if (hasUpper + hasLower + hasNums + hasSpecial >= 2) {
             score += 1;
-            }
-
-            // strength measurement text
-            if (score < 2) {
-            strength = "Weak";
-            // color formatting for password strength
-            strengthClass = "text-danger";
-            } else if (score < 4) {
-            strength = "Medium";
-            strengthClass = "text-warning";
-            } else if (score == 4) {
-            strength = "Strong";
-            strengthClass = 'text-success';
-            }
-
-            // display the password strength text
-            strengthMessage.textContent = `Password strength: ${strength}`;
-            strengthMessage.className = strengthClass;
         }
+
+            // strength measurement text and color
+            let strengthMessage = document.getElementById('strength-message');
+            if (score < 2) {
+                strengthMessage.textContent = "Weak";
+                strengthMessage.className = "strength-message weak";
+            } else if (score < 4) {
+                strengthMessage.textContent = "Medium";
+                strengthMessage.className = "strength-message medium";
+            } else if (score == 4) {
+                strengthMessage.textContent = "Strong";
+                strengthMessage.className = "strength-message strong";
+            }
+        }
+
 
         // check password strength after text entry
         passwordInput.addEventListener('input', strengthCheck);
@@ -282,5 +310,29 @@
         // button to copy the generated password into the form
         document.getElementById("insertGeneratedPassword").addEventListener("click", useGeneratedPassword);
     </script>
+
+  
+  <script>
+    // Script to open and close sidebar
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+    }
+     
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+    }
+    
+    // Modal Image Gallery
+    function onClick(element) {
+      document.getElementById("img01").src = element.src;
+      document.getElementById("modal01").style.display = "block";
+      var captionText = document.getElementById("caption");
+      captionText.innerHTML = element.alt;
+    }
+    </script>
+
+    <script src="generatedPassword.js"></script>
 </body>
 </html>
