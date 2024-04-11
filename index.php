@@ -69,14 +69,16 @@ $UserID = getUserID();
 
   <div class="centered-buttons">
     <button onclick="window.location.href='view_pass.php'">View All Passwords</button>
-    <button onclick="downloadCSV()">Download CSV File</button>
-    <button onclick="uploadCSV()">Upload CSV File</button>
+  <!--   <button onclick="downloadCSV()">Download CSV File</button>
+    <button onclick="uploadCSV()">Upload CSV File</button>-->
  
 
   <form action="logout.php" method="post">
     <?php
     if ($Admin) {
       // Admin Settings button will be visible to admin users
+		echo '<button onclick="downloadCSV()">Download CSV File</button>';
+		echo '<button onclick="uploadCSV()">Upload CSV File</button>';
         echo '<button type="button" onclick="window.location.href=\'adminmenu.php\'">Admin Settings</button>';
     }
     ?>
